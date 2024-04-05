@@ -54,7 +54,9 @@
         "lucatume/wp-browser": "^3.1",
         "phpro/grumphp": "^1.13",
         "phpunit/phpunit": "^9.2",
-        "szepeviktor/phpstan-wordpress": "^1.1.6"
+        "szepeviktor/phpstan-wordpress": "^1.1.6",
+        "slevomat/coding-standard": "^8.15",
+        "phpmd/phpmd": "^2.15"
     },
     "repositories": [
         {
