@@ -1,0 +1,79 @@
+{
+  "plugin": {
+    "name": "shop-core-plugin",
+    "version": "1.0.0"
+  },
+  "author": {
+    "name": "Pooria Setayesh",
+    "email": "pooriaset@yahoo.com",
+    "license": "GPL 2.0+",
+    "copyright": "2022 Shop"
+  },
+  "public-assets": {
+    "js": "true",
+    "css": "true"
+  },
+  "act-deact": {
+    "actdeact": "true",
+    "uninstall": "true"
+  },
+  "admin-assets": {
+    "admin-js": "true",
+    "admin-css": "true",
+    "settings-js": "true",
+    "settings-css": "true",
+    "admin-page": "true"
+  },
+  "ajax": "true",
+  "git-repo": "true",
+  "grumphp": "true",
+  "phpstan": "true",
+  "phpcs": "true",
+  "phpmd": "true",
+  "unit-test": "true",
+  "wpcli": "true",
+  "language-files": "true",
+  "libraries": [
+    "ayecode/wp-super-duper",
+    "freemius/wordpress-sdk",
+    "julien731/wp-review-me",
+    "origgami/cmb2-grid",
+    "seravo/wp-custom-bulk-actions",
+    "cmb2/cmb2",
+    "johnbillion/extended-cpts",
+    "inpsyde/assets",
+    "stevegrunwell/wp-cache-remember",
+    "wpbp/cpt_columns",
+    "wpbp/cronplus",
+    "wpbp/debug",
+    "wpbp/i18n-notice",
+    "wpbp/page-madness-detector",
+    "wpbp/pointerplus",
+    "wpbp/template",
+    "wpbp/widgets-helper",
+    "micropackage/requirements",
+    "wpdesk/wp-notice",
+    "yahnis-elsts/plugin-update-checker"
+  ],
+  "snippet": {
+    "backend": [
+      "bubble-notification-pending-cpt",
+      "donate-link-plugin-list",
+      "block",
+      "impexp-settings"
+    ],
+    "frontend": [
+      "body-class",
+      "cpt-search-support",
+      "wp-localize-script",
+      "shortcode",
+      "template-system"
+    ],
+    "system": [
+      "capability-system",
+      "upgrade-procedure",
+      "transient",
+      "rest"
+    ]
+  }
+}
