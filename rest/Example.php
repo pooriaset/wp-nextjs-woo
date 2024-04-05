@@ -1,7 +1,7 @@
 <?php
 
 /**
- * shop_core_plugin
+ * Shop_core_plugin
  *
  * @package   shop_core_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
@@ -58,27 +58,16 @@ class Example extends Base
 		// Only an example with 2 parameters
 		\register_rest_route(
 			'wp/v2',
-			'calc',
+			'demo',
 			array(
 				'methods'  => \WP_REST_Server::READABLE,
-				'callback' => array($this, 'sum'),
-				'args'     => array(
-					'first'  => array(
-						'default'           => 0,
-						'sanitize_callback' => 'absint',
-					),
-					'second' => array(
-						'default'           => 0,
-						'sanitize_callback' => 'absint',
-					),
-				),
+				'callback' => array($this, 'demo'),
 				'permission_callback' => function () {
 					return current_user_can("administrator");
 				},
 			)
 		);
 	}
-
 
 	/**
 	 * Examples
@@ -87,12 +76,8 @@ class Example extends Base
 	 * @param \WP_REST_Request<array> $request Values.
 	 * @return array
 	 */
-	public function sum(\WP_REST_Request $request)
-	{ // phpcs:ignore Squiz.Commenting.FunctionComment.IncorrectTypeHint
-		if (!isset($request['first'], $request['second'])) {
-			return array('result' => 0);
-		}
-
-		return array('result' => $request['first'] + $request['second']);
+	public function demo(\WP_REST_Request $request)
+	{
+		return ["Hello World!"];
 	}
 }
