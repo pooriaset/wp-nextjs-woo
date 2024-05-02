@@ -178,6 +178,9 @@ class PostTypes extends Base
 					'delete_terms' => 'manage_sliders',
 					'assign_terms' => 'read_slider',
 				),
+				'show_in_graphql' => true,
+				'graphql_single_name' => 'sliderCategory',
+				'graphql_plural_name' => 'sliderCategories',
 			),
 			array(
 				// Override the base names used for labels:
