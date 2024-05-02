@@ -1,5 +1,7 @@
 <?php
 
+use WP_Roles;
+
 /**
  * shop_core_plugin
  *
@@ -23,7 +25,7 @@
  */
 
 // If uninstall not called from WordPress, then exit.
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if (!defined('WP_UNINSTALL_PLUGIN')) {
 	exit;
 }
 
@@ -32,14 +34,15 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  *
  * @return void
  */
-function s_uninstall_multisite() {
-	if ( is_multisite() ) {
+function s_uninstall_multisite()
+{
+	if (is_multisite()) {
 		/** @var array<\WP_Site> $blogs */
 		$blogs = get_sites();
 
-		if ( !empty( $blogs ) ) {
-			foreach ( $blogs as $blog ) {
-				switch_to_blog( (int) $blog->blog_id );
+		if (!empty($blogs)) {
+			foreach ($blogs as $blog) {
+				switch_to_blog((int) $blog->blog_id);
 				s_uninstall();
 				restore_current_blog();
 			}
@@ -57,7 +60,8 @@ function s_uninstall_multisite() {
  * @global WP_Roles $wp_roles
  * @return void
  */
-function s_uninstall() { // phpcs:ignore
+function s_uninstall()
+{ // phpcs:ignore
 	global $wp_roles;
 	/*
 	@TODO
@@ -90,31 +94,31 @@ function s_uninstall() { // phpcs:ignore
 	 */
 
 	// Remove the capabilities of the plugin
-	if ( !isset( $wp_roles ) ) {
+	if (!isset($wp_roles)) {
 		$wp_roles = new WP_Roles; // phpcs:ignore
 	}
 
 	$caps = array(
 		'create_plugins',
-		'read_demo',
-		'read_private_demoes',
-		'edit_demo',
-		'edit_demoes',
-		'edit_private_demoes',
-		'edit_published_demoes',
-		'edit_others_demoes',
-		'publish_demoes',
-		'delete_demo',
-		'delete_demoes',
-		'delete_private_demoes',
-		'delete_published_demoes',
-		'delete_others_demoes',
-		'manage_demoes',
+		'read_slider',
+		'read_private_sliders',
+		'edit_slider',
+		'edit_sliders',
+		'edit_private_sliders',
+		'edit_published_sliders',
+		'edit_others_sliders',
+		'publish_sliders',
+		'delete_slider',
+		'delete_sliders',
+		'delete_private_sliders',
+		'delete_published_sliders',
+		'delete_others_sliders',
+		'manage_sliders',
 	);
 
-	foreach ( $wp_roles as $role ) {
-		foreach ( $caps as $cap ) {
-			$role->remove_cap( $cap );
+	foreach ($wp_roles as $role) {
+		foreach ($caps as $cap) {
+			$role->remove_cap($cap);
 		}
 	}
 }
