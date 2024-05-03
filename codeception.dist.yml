@@ -87,8 +87,8 @@ modules:
             phpBinary: php
             language: ''
             configFile: 'wp-config-test.php'
-            plugins: ['shop-core-plugin/shop-core-plugin.php']
-            activatePlugins: ['shop-core-plugin/shop-core-plugin.php']
+            plugins: ['nextjs-woo-plugin/nextjs-woo-plugin.php']
+            activatePlugins: ['nextjs-woo-plugin/nextjs-woo-plugin.php']
         WPWebDriver:
             url: '%WP_URL%'
             browser: chrome

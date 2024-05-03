@@ -1,34 +1,36 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Internals;
+namespace nextjs_woo_plugin\Internals;
 
 use DecodeLabs\Tagged as Html;
-use shop_core_plugin\Engine\Base;
+use nextjs_woo_plugin\Engine\Base;
 
 /**
  * Shortcodes of this plugin
  */
-class Shortcode extends Base {
+class Shortcode extends Base
+{
 
 	/**
 	 * Initialize the class.
 	 *
 	 * @return void|bool
 	 */
-	public function initialize() {
+	public function initialize()
+	{
 		parent::initialize();
 
-		\add_shortcode( 'foobar', array( $this, 'foobar_func' ) );
+		\add_shortcode('foobar', array($this, 'foobar_func'));
 	}
 
 	/**
@@ -38,10 +40,10 @@ class Shortcode extends Base {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public static function foobar_func( array $atts ) {
-		\shortcode_atts( array( 'foo' => 'something', 'bar' => 'something else' ), $atts );
+	public static function foobar_func(array $atts)
+	{
+		\shortcode_atts(array('foo' => 'something', 'bar' => 'something else'), $atts);
 
-		return Html::{'span.foo'}( 'foo = ' . $atts['foo'] ) . Html::{'span.bar'}( 'bar = ' . $atts['bar'] );
+		return Html::{'span.foo'}('foo = ' . $atts['foo']) . Html::{'span.bar'}('bar = ' . $atts['bar']);
 	}
-
 }

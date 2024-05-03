@@ -3,7 +3,7 @@
 use WP_Roles;
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
  * Fired when the plugin is uninstalled.
  *
@@ -17,7 +17,7 @@ use WP_Roles;
  * - Repeat with other user roles. Best directly by using the links/query string parameters.
  * - Repeat things for multisite. Once for a single site in the network, once sitewide.
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+

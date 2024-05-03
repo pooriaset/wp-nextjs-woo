@@ -1,18 +1,18 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Backend;
+namespace nextjs_woo_plugin\Backend;
 
-use shop_core_plugin\Engine\Base;
+use nextjs_woo_plugin\Engine\Base;
 
 /**
  * Activate and deactive method of the plugin and relates.
@@ -210,13 +210,13 @@ class ActDeact extends Base
 			return;
 		}
 
-		$version = \strval(\get_option('shop-core-plugin-version'));
+		$version = \strval(\get_option('nextjs-woo-plugin-version'));
 
 		if (!\version_compare(S_VERSION, $version, '>')) {
 			return;
 		}
 
-		\update_option('shop-core-plugin-version', S_VERSION);
+		\update_option('nextjs-woo-plugin-version', S_VERSION);
 		\delete_option(S_TEXTDOMAIN . '_fake-meta');
 	}
 

@@ -1,5 +1,5 @@
 {
-    "name": "shop-core-plugin",
+    "name": "nextjs-woo-plugin",
     "version": "1.0.0",
     "description": "",
     "author": "Pooria Setayesh <pooriaset@yahoo.com>",
@@ -19,7 +19,7 @@
         "vendor",
         "index.php",
         "LICENSE.txt",
-        "shop-core-plugin.php",
+        "nextjs-woo-plugin.php",
         "README.txt",
         "uninstall.php"
     ],

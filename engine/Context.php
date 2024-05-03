@@ -1,23 +1,24 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Engine;
+namespace nextjs_woo_plugin\Engine;
 
 use Inpsyde\WpContext;
 
 /**
- * shop-core-plugin Is Methods
+ * nextjs-woo-plugin Is Methods
  */
-class Context {
+class Context
+{
 
 	/**
 	 * WpContext Class
@@ -34,10 +35,11 @@ class Context {
 	 * @return bool
 	 * @SuppressWarnings("StaticAccess")
 	 */
-	public function request( string $type ) {
+	public function request(string $type)
+	{
 		$this->context = WpContext::determine();
 
-		switch ( $type ) {
+		switch ($type) {
 			case 'backend':
 				return $this->context->isBackoffice();
 
@@ -63,7 +65,7 @@ class Context {
 				return $this->is_amp();
 
 			default:
-				\_doing_it_wrong( __METHOD__, \esc_html( \sprintf( 'Unknown request type: %s', $type ) ), '1.0.0' );
+				\_doing_it_wrong(__METHOD__, \esc_html(\sprintf('Unknown request type: %s', $type)), '1.0.0');
 
 				return false;
 		}
@@ -74,8 +76,9 @@ class Context {
 	 *
 	 * @return bool
 	 */
-	public function is_amp() {
-		return \function_exists( 'is_amp_endpoint' ) && \is_amp_endpoint();
+	public function is_amp()
+	{
+		return \function_exists('is_amp_endpoint') && \is_amp_endpoint();
 	}
 
 	/**
@@ -84,16 +87,16 @@ class Context {
 	 * @param \WP_User|null $user The given user.
 	 * @return bool
 	 */
-	public static function is_user_admin( \WP_User $user = null ) { // phpcs:ignore
-		if ( \is_null( $user ) ) {
+	public static function is_user_admin(\WP_User $user = null)
+	{ // phpcs:ignore
+		if (\is_null($user)) {
 			$user = \wp_get_current_user();
 		}
 
-		if ( ! $user instanceof \WP_User ) {
-			\_doing_it_wrong( __METHOD__, 'To check if the user is admin is required a WP_User object.', '1.0.0' );
+		if (!$user instanceof \WP_User) {
+			\_doing_it_wrong(__METHOD__, 'To check if the user is admin is required a WP_User object.', '1.0.0');
 		}
 
-		return \is_multisite() ? \user_can( $user, 'manage_network' ) : \user_can( $user, 'manage_options' ); // phpcs:ignore
+		return \is_multisite() ? \user_can($user, 'manage_network') : \user_can($user, 'manage_options'); // phpcs:ignore
 	}
-
 }

@@ -1,1 +1,1 @@
-shop-core-plugin
+nextjs-woo-plugin

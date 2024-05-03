@@ -1,6 +1,6 @@
 {
   "plugin": {
-    "name": "shop-core-plugin",
+    "name": "nextjs-woo-plugin",
     "version": "1.0.0"
   },
   "author": {

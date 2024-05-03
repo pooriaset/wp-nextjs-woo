@@ -1,21 +1,22 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Internals;
+namespace nextjs_woo_plugin\Internals;
 
 /**
  * Create Shortcode and Gutenberg Block with Widget support
  */
-class ShortcodeBlock extends \WP_Super_Duper {
+class ShortcodeBlock extends \WP_Super_Duper
+{
 
 	/**
 	 * Parameters shared between methods
@@ -27,7 +28,8 @@ class ShortcodeBlock extends \WP_Super_Duper {
 	/**
 	 * Sets up the widgets name etc
 	 */
-	public function __construct() { // phpcs:ignore
+	public function __construct()
+	{ // phpcs:ignore
 		$options = array(
 			'textdomain'     => S_TEXTDOMAIN,
 			// textdomain of the plugin/theme (used to prefix the Gutenberg block)
@@ -41,7 +43,7 @@ class ShortcodeBlock extends \WP_Super_Duper {
 			'block-output'   => array( // the block visual output elements as an array
 				array(
 					'element' => 'p',
-					'title'   => \__( 'Placeholder', S_TEXTDOMAIN ),
+					'title'   => \__('Placeholder', S_TEXTDOMAIN),
 					'class'   => '[%className%]',
 					'content' => 'Hello: [%after_text%]', // block properties can be added by wrapping them in [%name%]
 				),
@@ -51,20 +53,20 @@ class ShortcodeBlock extends \WP_Super_Duper {
 			// The calling class name
 			'base_id'        => 'hello_world',
 			// this is used as the widget id and the shortcode id.
-			'name'           => \__( 'Hello World', S_TEXTDOMAIN ),
+			'name'           => \__('Hello World', S_TEXTDOMAIN),
 			// the name of the widget/block
 			'widget_ops'     => array(
 				'classname'   => 'hello-world-class',
 				// widget class
-				'description' => \esc_html__( 'This is an example that will take a text parameter and output it after `Hello:`.', S_TEXTDOMAIN ),
+				'description' => \esc_html__('This is an example that will take a text parameter and output it after `Hello:`.', S_TEXTDOMAIN),
 				// widget description
 			),
 			'no_wrap'        => true, // This will prevent the widget being wrapped in the containing widget class div.
 			'arguments'      => array( // these are the arguments that will be used in the widget, shortcode and block settings.
 				'after_text' => array( // this is the input name=''
-					'title'       => \__( 'Text after hello:', S_TEXTDOMAIN ),
+					'title'       => \__('Text after hello:', S_TEXTDOMAIN),
 					// input title
-					'desc'        => \__( 'This is the text that will appear after `Hello:`.', S_TEXTDOMAIN ),
+					'desc'        => \__('This is the text that will appear after `Hello:`.', S_TEXTDOMAIN),
 					// input description
 					'type'        => 'text',
 					// the type of input, test, select, checkbox etc.
@@ -80,7 +82,7 @@ class ShortcodeBlock extends \WP_Super_Duper {
 			),
 		);
 
-		parent::__construct( $options );
+		parent::__construct($options);
 	}
 
 	/**
@@ -89,13 +91,14 @@ class ShortcodeBlock extends \WP_Super_Duper {
 	 * @param array  $args The arguments values.
 	 * @param array  $widget_args The widget arguments when used.
 	 * @param string $content The shortcode content argument.
-     * @return string
+	 * @return string
 	 */
-	public function output( $args = array(), $widget_args = array(), $content = '' ) { // phpcs:ignore
+	public function output($args = array(), $widget_args = array(), $content = '')
+	{ // phpcs:ignore
 		$after_text    = '';
 		$another_input = '';
 
-		\extract( $args, EXTR_SKIP ); // phpcs:ignore
+		\extract($args, EXTR_SKIP); // phpcs:ignore
 
 		return 'Hello: ' . $after_text . '' . $another_input; // phpcs:ignore
 	}
@@ -105,16 +108,16 @@ class ShortcodeBlock extends \WP_Super_Duper {
 	 *
 	 * @return void
 	 */
-	public function initialize() {
+	public function initialize()
+	{
 		// To enable as widget
 		/*
 		\add_action(
 		'widgets_init',
 		static function() {
-			\register_widget( 'shop_core_plugin\Internals\ShortCodeBlock' );
+			\register_widget( 'nextjs_woo_plugin\Internals\ShortCodeBlock' );
 		}
 		);
 		*/
 	}
-
 }

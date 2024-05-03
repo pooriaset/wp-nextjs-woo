@@ -68,14 +68,14 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "shop_core_plugin\\Ajax\\": "ajax/",
-            "shop_core_plugin\\Backend\\": "backend/",
-            "shop_core_plugin\\Cli\\": "cli/",
-            "shop_core_plugin\\Engine\\": "engine/",
-            "shop_core_plugin\\Frontend\\": "frontend/",
-            "shop_core_plugin\\Integrations\\": "integrations/",
-            "shop_core_plugin\\Internals\\": "internals/",
-            "shop_core_plugin\\Rest\\": "rest/"
+            "nextjs_woo_plugin\\Ajax\\": "ajax/",
+            "nextjs_woo_plugin\\Backend\\": "backend/",
+            "nextjs_woo_plugin\\Cli\\": "cli/",
+            "nextjs_woo_plugin\\Engine\\": "engine/",
+            "nextjs_woo_plugin\\Frontend\\": "frontend/",
+            "nextjs_woo_plugin\\Integrations\\": "integrations/",
+            "nextjs_woo_plugin\\Internals\\": "internals/",
+            "nextjs_woo_plugin\\Rest\\": "rest/"
         },
         "files": [
             "vendor/wp-custom-bulk-actions/custom-bulk-actions.php"

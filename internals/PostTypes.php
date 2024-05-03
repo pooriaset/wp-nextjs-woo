@@ -1,20 +1,20 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Internals;
+namespace nextjs_woo_plugin\Internals;
 
 use CPT_columns;
 use Seravo_Custom_Bulk_Action;
-use shop_core_plugin\Engine\Base;
+use nextjs_woo_plugin\Engine\Base;
 
 /**
  * Post Types and Taxonomies

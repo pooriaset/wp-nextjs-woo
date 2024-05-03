@@ -1,42 +1,44 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Backend;
+namespace nextjs_woo_plugin\Backend;
 
-use shop_core_plugin\Engine\Base;
+use nextjs_woo_plugin\Engine\Base;
 
 /**
  * Provide Import and Export of the settings of the plugin
  */
-class ImpExp extends Base {
+class ImpExp extends Base
+{
 
 	/**
 	 * Initialize the class.
 	 *
 	 * @return void|bool
 	 */
-	public function initialize() {
-		if ( !parent::initialize() ) {
+	public function initialize()
+	{
+		if (!parent::initialize()) {
 			return;
 		}
 
-		if ( !\current_user_can( 'manage_options' ) ) {
+		if (!\current_user_can('manage_options')) {
 			return;
 		}
 
 		// Add the export settings method
-		\add_action( 'admin_init', array( $this, 'settings_export' ) );
+		\add_action('admin_init', array($this, 'settings_export'));
 		// Add the import settings method
-		\add_action( 'admin_init', array( $this, 'settings_import' ) );
+		\add_action('admin_init', array($this, 'settings_import'));
 	}
 
 	/**
@@ -45,30 +47,31 @@ class ImpExp extends Base {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function settings_export() {
+	public function settings_export()
+	{
 		if (
-			empty( $_POST[ 's_action' ] ) || //phpcs:ignore WordPress.Security.NonceVerification
-			'export_settings' !== \sanitize_text_field( \wp_unslash( $_POST[ 's_action' ] ) ) //phpcs:ignore WordPress.Security.NonceVerification
+			empty($_POST['s_action']) || //phpcs:ignore WordPress.Security.NonceVerification
+			'export_settings' !== \sanitize_text_field(\wp_unslash($_POST['s_action'])) //phpcs:ignore WordPress.Security.NonceVerification
 		) {
 			return;
 		}
 
-		if ( !\wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST[ 's_export_nonce' ] ) ), 's_export_nonce' ) ) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		if (!\wp_verify_nonce(\sanitize_text_field(\wp_unslash($_POST['s_export_nonce'])), 's_export_nonce')) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			return;
 		}
 
 		$settings      = array();
-		$settings[ 0 ] = \get_option( S_TEXTDOMAIN . '-settings' );
-		$settings[ 1 ] = \get_option( S_TEXTDOMAIN . '-settings-second' );
+		$settings[0] = \get_option(S_TEXTDOMAIN . '-settings');
+		$settings[1] = \get_option(S_TEXTDOMAIN . '-settings-second');
 
-		\ignore_user_abort( true );
+		\ignore_user_abort(true);
 
 		\nocache_headers();
-		\header( 'Content-Type: application/json; charset=utf-8' );
-		\header( 'Content-Disposition: attachment; filename=shop_core_plugin-settings-export-' . \gmdate( 'm-d-Y' ) . '.json' );
-		\header( 'Expires: 0' );
+		\header('Content-Type: application/json; charset=utf-8');
+		\header('Content-Disposition: attachment; filename=nextjs_woo_plugin-settings-export-' . \gmdate('m-d-Y') . '.json');
+		\header('Expires: 0');
 
-		echo \wp_json_encode( $settings, JSON_PRETTY_PRINT );
+		echo \wp_json_encode($settings, JSON_PRETTY_PRINT);
 
 		exit; // phpcs:ignore
 	}
@@ -79,54 +82,54 @@ class ImpExp extends Base {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function settings_import() {
+	public function settings_import()
+	{
 		if (
-			empty( $_POST[ 's_action' ] ) || //phpcs:ignore WordPress.Security.NonceVerification
-			'import_settings' !== \sanitize_text_field( \wp_unslash( $_POST[ 's_action' ] ) ) //phpcs:ignore WordPress.Security.NonceVerification
+			empty($_POST['s_action']) || //phpcs:ignore WordPress.Security.NonceVerification
+			'import_settings' !== \sanitize_text_field(\wp_unslash($_POST['s_action'])) //phpcs:ignore WordPress.Security.NonceVerification
 		) {
 			return;
 		}
 
-		if ( !\wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST[ 's_import_nonce' ] ) ), 's_import_nonce' ) ) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		if (!\wp_verify_nonce(\sanitize_text_field(\wp_unslash($_POST['s_import_nonce'])), 's_import_nonce')) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			return;
 		}
 
-		if ( !isset( $_FILES[ 's_import_file' ][ 'name' ] ) ) {
+		if (!isset($_FILES['s_import_file']['name'])) {
 			return;
 		}
 
-		$file_name_parts = \explode( '.', $_FILES[ 's_import_file' ][ 'name' ] ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-		$extension       = \end( $file_name_parts );
+		$file_name_parts = \explode('.', $_FILES['s_import_file']['name']); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$extension       = \end($file_name_parts);
 
-		if ( 'json' !== $extension ) {
-			\wp_die( \esc_html__( 'Please upload a valid .json file', S_TEXTDOMAIN ) );
+		if ('json' !== $extension) {
+			\wp_die(\esc_html__('Please upload a valid .json file', S_TEXTDOMAIN));
 		}
 
-		$import_file = $_FILES[ 's_import_file' ][ 'tmp_name' ]; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$import_file = $_FILES['s_import_file']['tmp_name']; //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
-		if ( empty( $import_file ) ) {
-			\wp_die( \esc_html__( 'Please upload a file to import', S_TEXTDOMAIN ) );
+		if (empty($import_file)) {
+			\wp_die(\esc_html__('Please upload a file to import', S_TEXTDOMAIN));
 		}
 
 		// Retrieve the settings from the file and convert the json object to an array.
-		$settings_file = file_get_contents( $import_file );// phpcs:ignore
+		$settings_file = file_get_contents($import_file); // phpcs:ignore
 
-		if ( $settings_file !== false ) {
-			$settings = \json_decode( (string) $settings_file );
+		if ($settings_file !== false) {
+			$settings = \json_decode((string) $settings_file);
 
-			if ( \is_array( $settings ) ) {
-				\update_option( S_TEXTDOMAIN . '-settings', \get_object_vars( $settings[ 0 ] ) );
-				\update_option( S_TEXTDOMAIN . '-settings-second', \get_object_vars( $settings[ 1 ] ) );
+			if (\is_array($settings)) {
+				\update_option(S_TEXTDOMAIN . '-settings', \get_object_vars($settings[0]));
+				\update_option(S_TEXTDOMAIN . '-settings-second', \get_object_vars($settings[1]));
 			}
 
-			\wp_safe_redirect( \admin_url( 'options-general.php?page=' . S_TEXTDOMAIN ) );
+			\wp_safe_redirect(\admin_url('options-general.php?page=' . S_TEXTDOMAIN));
 			exit;
 		}
 
 		new \WP_Error(
-				'shop_core_plugin_import_settings_failed',
-				\__( 'Failed to import the settings.', S_TEXTDOMAIN )
-			);
+			'nextjs_woo_plugin_import_settings_failed',
+			\__('Failed to import the settings.', S_TEXTDOMAIN)
+		);
 	}
-
 }

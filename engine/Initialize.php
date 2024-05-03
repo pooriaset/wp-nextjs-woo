@@ -1,23 +1,24 @@
 <?php
 
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Engine;
+namespace nextjs_woo_plugin\Engine;
 
-use shop_core_plugin\Engine;
+use nextjs_woo_plugin\Engine;
 
 /**
- * shop_core_plugin Initializer
+ * nextjs_woo_plugin Initializer
  */
-class Initialize {
+class Initialize
+{
 
 	/**
 	 * List of class to initialize.
@@ -46,32 +47,33 @@ class Initialize {
 	 * @param \Composer\Autoload\ClassLoader $composer Composer autoload output.
 	 * @since 1.0.0
 	 */
-	public function __construct( \Composer\Autoload\ClassLoader $composer ) {
+	public function __construct(\Composer\Autoload\ClassLoader $composer)
+	{
 		$this->content  = new Engine\Context;
 		$this->composer = $composer;
 
-		$this->get_classes( 'Internals' );
-		$this->get_classes( 'Integrations' );
+		$this->get_classes('Internals');
+		$this->get_classes('Integrations');
 
-		if ( $this->content->request( 'rest' ) ) {
-			$this->get_classes( 'Rest' );
+		if ($this->content->request('rest')) {
+			$this->get_classes('Rest');
 		}
 
-		if ( $this->content->request( 'cli' ) ) {
-			$this->get_classes( 'Cli' );
+		if ($this->content->request('cli')) {
+			$this->get_classes('Cli');
 		}
 
-		if ( $this->content->request( 'ajax' ) ) {
-			$this->get_classes( 'Ajax' );
+		if ($this->content->request('ajax')) {
+			$this->get_classes('Ajax');
 		}
 
 
-		if ( $this->content->request( 'backend' ) ) {
-			$this->get_classes( 'Backend' );
+		if ($this->content->request('backend')) {
+			$this->get_classes('Backend');
 		}
 
-		if ( $this->content->request( 'frontend' ) ) {
-			$this->get_classes( 'Frontend' );
+		if ($this->content->request('frontend')) {
+			$this->get_classes('Frontend');
 		}
 
 		$this->load_classes();
@@ -83,17 +85,18 @@ class Initialize {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	private function load_classes() {
-		$this->classes = \apply_filters( 'shop_core_plugin_classes_to_execute', $this->classes );
+	private function load_classes()
+	{
+		$this->classes = \apply_filters('nextjs_woo_plugin_classes_to_execute', $this->classes);
 
-		foreach ( $this->classes as $class ) {
+		foreach ($this->classes as $class) {
 			try {
-				$this->initialize_plugin_class( $class );
-			} catch ( \Throwable $err ) {
-				\do_action( 'shop_core_plugin_initialize_failed', $err );
+				$this->initialize_plugin_class($class);
+			} catch (\Throwable $err) {
+				\do_action('nextjs_woo_plugin_initialize_failed', $err);
 
-				if ( \WP_DEBUG ) {
-					throw new \Exception( $err->getMessage() ); //phpcs:ignore
+				if (\WP_DEBUG) {
+					throw new \Exception($err->getMessage()); //phpcs:ignore
 				}
 			}
 		}
@@ -107,22 +110,23 @@ class Initialize {
 	 * @SuppressWarnings("MissingImport")
 	 * @return void
 	 */
-	private function initialize_plugin_class( $classtovalidate ) {
-		$reflection = new \ReflectionClass( $classtovalidate );
+	private function initialize_plugin_class($classtovalidate)
+	{
+		$reflection = new \ReflectionClass($classtovalidate);
 
-		if ( $reflection->isAbstract() ) {
+		if ($reflection->isAbstract()) {
 			return;
 		}
 
 		$temp = new $classtovalidate;
 		\add_filter(
-			'shop_core_plugin_instance_' . $classtovalidate,
-			function() use ( $temp ) {
+			'nextjs_woo_plugin_instance_' . $classtovalidate,
+			function () use ($temp) {
 				return $temp;
 			}
 		);
 
-		if ( !\method_exists( $temp, 'initialize' ) ) {
+		if (!\method_exists($temp, 'initialize')) {
 			return;
 		}
 
@@ -136,17 +140,18 @@ class Initialize {
 	 * @since 1.0.0
 	 * @return array Return the classes.
 	 */
-	private function get_classes( string $namespacetofind ) {
+	private function get_classes(string $namespacetofind)
+	{
 		$prefix          = $this->composer->getPrefixesPsr4();
 		$classmap        = $this->composer->getClassMap();
-		$namespacetofind = 'shop_core_plugin\\' . $namespacetofind;
+		$namespacetofind = 'nextjs_woo_plugin\\' . $namespacetofind;
 
 		// In case composer has autoload optimized
-		if ( isset( $classmap[ 'shop_core_plugin\\Engine\\Initialize' ] ) ) {
-			$classes = \array_keys( $classmap );
+		if (isset($classmap['nextjs_woo_plugin\\Engine\\Initialize'])) {
+			$classes = \array_keys($classmap);
 
-			foreach ( $classes as $class ) {
-				if ( 0 !== \strncmp( (string) $class, $namespacetofind, \strlen( $namespacetofind ) ) ) {
+			foreach ($classes as $class) {
+				if (0 !== \strncmp((string) $class, $namespacetofind, \strlen($namespacetofind))) {
 					continue;
 				}
 
@@ -159,13 +164,13 @@ class Initialize {
 		$namespacetofind .= '\\';
 
 		// In case composer is not optimized
-		if ( isset( $prefix[ $namespacetofind ] ) ) {
-			$folder    = $prefix[ $namespacetofind ][0];
-			$php_files = $this->scandir( $folder );
-			$this->find_classes( $php_files, $folder, $namespacetofind );
+		if (isset($prefix[$namespacetofind])) {
+			$folder    = $prefix[$namespacetofind][0];
+			$php_files = $this->scandir($folder);
+			$this->find_classes($php_files, $folder, $namespacetofind);
 
-			if ( !WP_DEBUG ) {
-				\wp_die( \esc_html__( 'shop-core-plugin is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', S_TEXTDOMAIN ) );
+			if (!WP_DEBUG) {
+				\wp_die(\esc_html__('nextjs-woo-plugin is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', S_TEXTDOMAIN));
 			}
 
 			return $this->classes;
@@ -183,21 +188,22 @@ class Initialize {
 	 * @since 1.0.0
 	 * @return array List of files.
 	 */
-	private function scandir( string $folder, string $exclude_str = '~' ) {
+	private function scandir(string $folder, string $exclude_str = '~')
+	{
 		// Also exclude these specific scandir findings.
-		$blacklist = array( '..', '.', 'index.php' );
+		$blacklist = array('..', '.', 'index.php');
 		// Scan for files.
-		$temp_files = \scandir( $folder );
+		$temp_files = \scandir($folder);
 
 		$files = array();
 
-		if ( \is_array( $temp_files ) ) {
-			foreach ( $temp_files as $temp_file ) {
+		if (\is_array($temp_files)) {
+			foreach ($temp_files as $temp_file) {
 				// Only include filenames that DO NOT contain the excluded string and ARE NOT on the scandir result blacklist.
 				if (
-					\is_string( $exclude_str ) && false !== \mb_strpos( $temp_file, $exclude_str )
+					\is_string($exclude_str) && false !== \mb_strpos($temp_file, $exclude_str)
 					|| $temp_file[0] === '.'
-					|| \in_array( $temp_file, $blacklist, true )
+					|| \in_array($temp_file, $blacklist, true)
 				) {
 					continue;
 				}
@@ -218,29 +224,29 @@ class Initialize {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	private function find_classes( array $php_files, string $folder, string $base ) {
-		foreach ( $php_files as $php_file ) {
-			$class_name = \substr( $php_file, 0, -4 );
+	private function find_classes(array $php_files, string $folder, string $base)
+	{
+		foreach ($php_files as $php_file) {
+			$class_name = \substr($php_file, 0, -4);
 			$path       = $folder . '/' . $php_file;
 
-			if ( \is_file( $path ) ) {
+			if (\is_file($path)) {
 				$this->classes[] = $base . $class_name;
 
 				continue;
 			}
 
 			// Verify the Namespace level
-			if ( \substr_count( $base . $class_name, '\\' ) < 2 ) {
+			if (\substr_count($base . $class_name, '\\') < 2) {
 				continue;
 			}
 
-			if ( !\is_dir( $path ) || \strtolower( $php_file ) === $php_file ) {
+			if (!\is_dir($path) || \strtolower($php_file) === $php_file) {
 				continue;
 			}
 
-			$sub_php_files = $this->scandir( $folder . '/' . $php_file );
-			$this->find_classes( $sub_php_files, $folder . '/' . $php_file, $base . $php_file . '\\' );
+			$sub_php_files = $this->scandir($folder . '/' . $php_file);
+			$this->find_classes($sub_php_files, $folder . '/' . $php_file, $base . $php_file . '\\');
 		}
 	}
-
 }

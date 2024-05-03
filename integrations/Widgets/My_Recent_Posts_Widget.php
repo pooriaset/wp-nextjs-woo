@@ -1,41 +1,44 @@
 <?php
+
 /**
- * shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Integrations\Widgets;
+namespace nextjs_woo_plugin\Integrations\Widgets;
 
 /**
  * Create custom widget class extending WPH_Widget
  */
-class My_Recent_Posts_Widget extends \WPH_Widget {
+class My_Recent_Posts_Widget extends \WPH_Widget
+{
 
 	/**
 	 * Initialize the widget
 	 *
 	 * @return void
 	 */
-	public function __construct() { // phpcs:ignore
+	public function __construct()
+	{ // phpcs:ignore
 		$args = array(
-			'label'       => \__( 'My Recent Posts Example', S_TEXTDOMAIN ),
-			'description' => \__( 'My Recent Posts Widget Description', S_TEXTDOMAIN ),
+			'label'       => \__('My Recent Posts Example', S_TEXTDOMAIN),
+			'description' => \__('My Recent Posts Widget Description', S_TEXTDOMAIN),
 			'slug'        => 'recent-posts',
 			// 'options' => array( 'cache' => true )
 		);
 
-		$args[ 'fields' ] = array(
+		$args['fields'] = array(
 			// Title field
 			array(
 				// Field name/label
-				'name'     => \__( 'Title', S_TEXTDOMAIN ),
+				'name'     => \__('Title', S_TEXTDOMAIN),
 				// Field description
-				'desc'     => \__( 'Enter the widget title.', S_TEXTDOMAIN ),
+				'desc'     => \__('Enter the widget title.', S_TEXTDOMAIN),
 				// Field id
 				'id'       => 'title',
 				// Field type ( text, checkbox, textarea, select, select-group, taxonomy, taxonomyterm, pages, hidden )
@@ -43,7 +46,7 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 				// Class, rows, cols
 				'class'    => 'widefat',
 				// Default value
-				'std'      => \__( 'Recent Posts', S_TEXTDOMAIN ),
+				'std'      => \__('Recent Posts', S_TEXTDOMAIN),
 				/**
 				Set the field validation type/s
 				'alpha_dash'
@@ -74,16 +77,16 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 			),
 			// Taxonomy Field
 			array(
-				'name'  => \__( 'Taxonomy', S_TEXTDOMAIN ),
-				'desc'  => \__( 'Set the taxonomy.', S_TEXTDOMAIN ),
+				'name'  => \__('Taxonomy', S_TEXTDOMAIN),
+				'desc'  => \__('Set the taxonomy.', S_TEXTDOMAIN),
 				'id'    => 'taxonomy',
 				'type'  => 'taxonomy',
 				'class' => 'widefat',
 			),
 			// Taxonomy Field
 			array(
-				'name'     => \__( 'Taxonomy terms', S_TEXTDOMAIN ),
-				'desc'     => \__( 'Set the taxonomy terms.', S_TEXTDOMAIN ),
+				'name'     => \__('Taxonomy terms', S_TEXTDOMAIN),
+				'desc'     => \__('Set the taxonomy terms.', S_TEXTDOMAIN),
 				'id'       => 'taxonomyterm',
 				'type'     => 'taxonomyterm',
 				'taxonomy' => 'category',
@@ -91,16 +94,16 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 			),
 			// Pages Field
 			array(
-				'name'  => \__( 'Pages', S_TEXTDOMAIN ),
-				'desc'  => \__( 'Set the page.', S_TEXTDOMAIN ),
+				'name'  => \__('Pages', S_TEXTDOMAIN),
+				'desc'  => \__('Set the page.', S_TEXTDOMAIN),
 				'id'    => 'pages',
 				'type'  => 'pages',
 				'class' => 'widefat',
 			),
 			// Post type Field
 			array(
-				'name'     => \__( 'Post type', S_TEXTDOMAIN ),
-				'desc'     => \__( 'Set the post type.', S_TEXTDOMAIN ),
+				'name'     => \__('Post type', S_TEXTDOMAIN),
+				'desc'     => \__('Set the post type.', S_TEXTDOMAIN),
 				'id'       => 'posttype',
 				'type'     => 'posttype',
 				'posttype' => 'post',
@@ -108,34 +111,34 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 			),
 			// Amount Field
 			array(
-				'name'     => \__( 'Amount', S_TEXTDOMAIN ),
-				'desc'     => \__( 'Select how many posts to show.', S_TEXTDOMAIN ),
+				'name'     => \__('Amount', S_TEXTDOMAIN),
+				'desc'     => \__('Select how many posts to show.', S_TEXTDOMAIN),
 				'id'       => 'amount',
 				'type'     => 'select',
 				// Selectbox fields
 				'fields'   => array(
 					array(
-						'name'  => \__( '1 Post', S_TEXTDOMAIN ),
+						'name'  => \__('1 Post', S_TEXTDOMAIN),
 						'value' => '1',
 					),
 					array(
-						'name'  => \__( '2 Posts', S_TEXTDOMAIN ),
+						'name'  => \__('2 Posts', S_TEXTDOMAIN),
 						'value' => '2',
 					),
 					array(
-						'name'  => \__( '3 Posts', S_TEXTDOMAIN ),
+						'name'  => \__('3 Posts', S_TEXTDOMAIN),
 						'value' => '3',
 					),
 
-				// Add more options
+					// Add more options
 				),
 				'validate' => 'my_custom_validation',
 				'filter'   => 'strip_tags|esc_attr',
 			),
 			// Output type checkbox
 			array(
-				'name'   => \__( 'Output as list', S_TEXTDOMAIN ),
-				'desc'   => \__( 'Wraps posts with the <li> tag.', S_TEXTDOMAIN ),
+				'name'   => \__('Output as list', S_TEXTDOMAIN),
+				'desc'   => \__('Wraps posts with the <li> tag.', S_TEXTDOMAIN),
 				'id'     => 'list',
 				'type'   => 'checkbox',
 				// Checked by default:
@@ -144,7 +147,7 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 			),
 		);
 		// Create widget
-		$this->create_widget( $args );
+		$this->create_widget($args);
 	}
 
 	/**
@@ -154,8 +157,9 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 	 * @param string $value The text.
 	 * @return bool
 	 */
-	public function my_custom_validation( string $value ) {
-		return \strlen( $value ) <= 1;
+	public function my_custom_validation(string $value)
+	{
+		return \strlen($value) <= 1;
 	}
 
 	/**
@@ -166,18 +170,19 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 	 * @param array $instance The settings saved.
 	 * @return void
 	 */
-	public function widget( $args, $instance ) { //phpcs:ignore
-		$out = $args[ 'before_widget' ];
+	public function widget($args, $instance)
+	{ //phpcs:ignore
+		$out = $args['before_widget'];
 		// And here do whatever you want
-		$out .= $args[ 'before_title' ];
-		$out .= $instance[ 'title' ];
-		$out .= $args[ 'after_title' ];
+		$out .= $args['before_title'];
+		$out .= $instance['title'];
+		$out .= $args['after_title'];
 
 		// Here you would get the most recent posts based on the selected amount: $instance['amount']
 		// Then return those posts on the $out variable ready for the output
 		$out .= '<p>Hey There! </p>';
 
-		$out .= $args[ 'after_widget' ];
+		$out .= $args['after_widget'];
 		echo $out; // phpcs:ignore
 	}
 
@@ -186,13 +191,13 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 	 *
 	 * @return void
 	 */
-	public function initialize() {
+	public function initialize()
+	{
 		\add_action(
-		'widgets_init',
-		static function() {
-			\register_widget( 'shop_core_plugin\Integrations\Widgets\My_Recent_Posts_Widget' );
-		}
+			'widgets_init',
+			static function () {
+				\register_widget('nextjs_woo_plugin\Integrations\Widgets\My_Recent_Posts_Widget');
+			}
 		);
 	}
-
 }

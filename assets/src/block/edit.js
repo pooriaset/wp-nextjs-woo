@@ -65,7 +65,7 @@ export const Edit = ( { isSelected, attributes, setAttributes } ) => {
 				</a>
 			</h4>
 			<p>
-				Edit shop-core-plugin/assets/src/block/index.js to change this block
+				Edit nextjs-woo-plugin/assets/src/block/index.js to change this block
 			</p>
 		</div>
 	);

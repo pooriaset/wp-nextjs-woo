@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "shop-core-plugin/block-name",
+	"name": "nextjs-woo-plugin/block-name",
 	"title": "block_name",
 	"category": "text",
 	"editorScript": "file:./build/plugin-block.js",

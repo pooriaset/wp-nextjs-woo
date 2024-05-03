@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Shop_core_plugin
+ * nextjs_woo_plugin
  *
- * @package   shop_core_plugin
+ * @package   nextjs_woo_plugin
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace shop_core_plugin\Rest;
+namespace nextjs_woo_plugin\Rest;
 
-use shop_core_plugin\Engine\Base;
+use nextjs_woo_plugin\Engine\Base;
 
 /**
  * Example class for REST
