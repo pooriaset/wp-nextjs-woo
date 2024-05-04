@@ -52,6 +52,7 @@ class Initialize
 		$this->content  = new Engine\Context;
 		$this->composer = $composer;
 
+		$this->get_classes('Graphql');
 		$this->get_classes('Internals');
 		$this->get_classes('Integrations');
 
