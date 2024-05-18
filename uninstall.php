@@ -1,5 +1,6 @@
 <?php
 
+use nextjs_woo_plugin\Backend\Caps;
 use WP_Roles;
 
 /**
@@ -98,23 +99,7 @@ function s_uninstall()
 		$wp_roles = new WP_Roles; // phpcs:ignore
 	}
 
-	$caps = array(
-		'create_plugins',
-		'read_slider',
-		'read_private_sliders',
-		'edit_slider',
-		'edit_sliders',
-		'edit_private_sliders',
-		'edit_published_sliders',
-		'edit_others_sliders',
-		'publish_sliders',
-		'delete_slider',
-		'delete_sliders',
-		'delete_private_sliders',
-		'delete_published_sliders',
-		'delete_others_sliders',
-		'manage_sliders',
-	);
+	$caps = Caps::$caps;
 
 	foreach ($wp_roles as $role) {
 		foreach ($caps as $cap) {

@@ -50,6 +50,7 @@ class PostTypes extends Base
 				'order'    => '-1',
 			)
 		);
+
 		/*
 		 * Custom Bulk Actions
 		 */
@@ -152,6 +153,44 @@ class PostTypes extends Base
 				'plural'   => \__('sliders', S_TEXTDOMAIN),
 			)
 		);
+
+
+		\register_extended_post_type(
+			'size',
+			array(
+				// Show all posts on the post type archive:
+				'archive'            => array(
+					'nopaging' => true,
+				),
+				'slug'               => 'size',
+				'show_in_rest'       => true,
+				'show_in_graphql' => true,
+				'graphql_single_name' => 'size',
+				'graphql_plural_name' => 'sizes',
+				'public' => true,
+				'publicly_queryable' => true,
+				'dashboard_activity' => true,
+				'capability_type'    => array('size', 'sizes'),
+				// Add some custom columns to the admin screen
+				'admin_cols'         => array(
+					'featured_image' => array(
+						'title'          => 'Featured Image',
+						'featured_image' => 'thumbnail',
+					),
+					'title',
+					'date'           => array(
+						'title'   => 'Date',
+						'default' => 'ASC',
+					),
+				)
+			),
+			array(
+				// Override the base names used for labels:
+				'singular' => \__('Size', S_TEXTDOMAIN),
+				'plural'   => \__('Sizes', S_TEXTDOMAIN),
+			)
+		);
+
 
 		$slider_cpt->add_taxonomy('slider-section', array('hierarchical' => false, 'show_ui' => false));
 		// Create Custom Taxonomy https://github.com/johnbillion/extended-taxos

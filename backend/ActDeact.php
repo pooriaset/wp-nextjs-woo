@@ -122,23 +122,8 @@ class ActDeact extends Base
 	public static function add_capabilities()
 	{
 		// Add the capabilites to all the roles
-		$caps  = array(
-			'create_plugins',
-			'read_slider',
-			'read_private_sliders',
-			'edit_slider',
-			'edit_sliders',
-			'edit_private_sliders',
-			'edit_published_sliders',
-			'edit_others_sliders',
-			'publish_sliders',
-			'delete_slider',
-			'delete_sliders',
-			'delete_private_sliders',
-			'delete_published_sliders',
-			'delete_others_sliders',
-			'manage_sliders',
-		);
+		$caps  = Caps::$caps;
+
 		$roles = array(
 			\get_role('administrator'),
 			\get_role('editor'),
@@ -166,22 +151,8 @@ class ActDeact extends Base
 	public static function remove_capabilities()
 	{
 		// Remove capabilities to specific roles
-		$bad_caps = array(
-			'create_sliders',
-			'read_private_sliders',
-			'edit_slider',
-			'edit_sliders',
-			'edit_private_sliders',
-			'edit_published_sliders',
-			'edit_others_sliders',
-			'publish_sliders',
-			'delete_slider',
-			'delete_sliders',
-			'delete_private_sliders',
-			'delete_published_sliders',
-			'delete_others_sliders',
-			'manage_sliders',
-		);
+		$bad_caps = Caps::$caps;
+
 		$roles    = array(
 			\get_role('author'),
 			\get_role('contributor'),
