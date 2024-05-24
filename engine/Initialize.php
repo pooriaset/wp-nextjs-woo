@@ -53,6 +53,7 @@ class Initialize
 		$this->composer = $composer;
 
 		$this->get_classes('Graphql');
+		$this->get_classes('Woocommerce');
 		$this->get_classes('Internals');
 		$this->get_classes('Integrations');
 

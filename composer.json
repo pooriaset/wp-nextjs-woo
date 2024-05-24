@@ -76,6 +76,7 @@
             "nextjs_woo_plugin\\Integrations\\": "integrations/",
             "nextjs_woo_plugin\\Internals\\": "internals/",
             "nextjs_woo_plugin\\Graphql\\": "graphql/",
+            "nextjs_woo_plugin\\Woocommerce\\": "woocommerce/",
             "nextjs_woo_plugin\\Rest\\": "rest/"
         },
         "files": [
