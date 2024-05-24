@@ -60,7 +60,7 @@ class CustomMetaData extends Base
     public function add_total_on_sale_discount_amount_to_cart_item()
     {
         register_graphql_field('CartItem', 'totalOnSaleDiscount', [
-            'type' => 'String',
+            'type' => 'Float',
             'description' => __('The discount amount for the product variant in the cart.', 'wp-graphql-woocommerce'),
             'resolve' => function ($cart_item) {
                 $variation_id = $cart_item['variation_id'];
