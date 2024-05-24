@@ -33,8 +33,46 @@ class CustomMetaData extends Base
 
         // Graphql
         add_action('graphql_register_types', array($this, "register_custom_meta_data_properties"));
+        add_action('graphql_register_types', array($this, "add_total_on_sale_discount_amount_to_cart_item"));
     }
 
+    /**
+     * Calculate discount amount and percentage for a given product.
+     *
+     * @param int $post_id The ID of the product post.
+     * @return array{amount: float, percentage: float} An array containing the discount amount and percentage.
+     */
+    public static function calculate_discount($post_id)
+    {
+        $regular_price = get_post_meta($post_id, '_regular_price', true);
+        $sale_price = get_post_meta($post_id, '_sale_price', true);
+
+        $amount = 0;
+        $percentage = 0;
+        if ($regular_price && $sale_price && $regular_price > $sale_price) {
+            $amount = $regular_price - $sale_price;
+            $percentage = (($regular_price - $sale_price) / $regular_price) * 100;
+        }
+
+        return  ["amount" => $amount, "percentage" => $percentage];
+    }
+
+    public function add_total_on_sale_discount_amount_to_cart_item()
+    {
+        register_graphql_field('CartItem', 'totalOnSaleDiscount', [
+            'type' => 'String',
+            'description' => __('The discount amount for the product variant in the cart.', 'wp-graphql-woocommerce'),
+            'resolve' => function ($cart_item) {
+                $variation_id = $cart_item['variation_id'];
+                $quantity = (int)$cart_item['quantity'];
+
+                ['amount' => $amount]  = self::calculate_discount($variation_id);
+                $discount_amount = $amount * $quantity;
+
+                return $discount_amount;
+            },
+        ]);
+    }
 
     public function calculate_and_save_discounts($post_id)
     {
