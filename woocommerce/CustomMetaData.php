@@ -38,7 +38,7 @@ class CustomMetaData extends Base
 
     public function calculate_and_save_discounts($post_id)
     {
-        if (get_post_type($post_id) == 'product') {
+        if (get_post_type($post_id) == 'product' || get_post_type($post_id) == 'product_variation') {
             $max_discount_amount = 0;
             $max_discount_percentage = 0;
 
