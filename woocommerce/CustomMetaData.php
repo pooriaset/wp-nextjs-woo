@@ -85,37 +85,19 @@ class CustomMetaData extends Base
                 // Loop through variations
                 $variations = $product->get_children();
                 foreach ($variations as $variation_id) {
-                    $regular_price = get_post_meta($variation_id, '_regular_price', true);
-                    $sale_price = get_post_meta($variation_id, '_sale_price', true);
+                    ['amount' => $amount, "percentage" => $percentage]  = self::calculate_discount($variation_id);
 
-                    if ($regular_price && $sale_price && $regular_price > $sale_price) {
-                        // Calculate discount amount
-                        $discount_amount = $regular_price - $sale_price;
-
-                        // Calculate discount percentage
-                        $discount_percentage = (($regular_price - $sale_price) / $regular_price) * 100;
-
-                        // Update maximum values
-                        if ($discount_amount > $max_discount_amount) {
-                            $max_discount_amount = $discount_amount;
-                        }
-                        if ($discount_percentage > $max_discount_percentage) {
-                            $max_discount_percentage = $discount_percentage;
-                        }
+                    if ($amount > $max_discount_amount) {
+                        $max_discount_amount = $amount;
+                    }
+                    if ($percentage > $max_discount_percentage) {
+                        $max_discount_percentage = $percentage;
                     }
                 }
             } else {
-                // For simple products
-                $regular_price = get_post_meta($post_id, '_regular_price', true);
-                $sale_price = get_post_meta($post_id, '_sale_price', true);
-
-                if ($regular_price && $sale_price && $regular_price > $sale_price) {
-                    // Calculate discount amount
-                    $max_discount_amount = $regular_price - $sale_price;
-
-                    // Calculate discount percentage
-                    $max_discount_percentage = (($regular_price - $sale_price) / $regular_price) * 100;
-                }
+                ['amount' => $amount, "percentage" => $percentage]  = self::calculate_discount($post_id);
+                $max_discount_amount = $amount;
+                $max_discount_percentage = $percentage;
             }
 
             // Save the maximum discount values
