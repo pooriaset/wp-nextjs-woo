@@ -19,9 +19,9 @@ jobs:
         php-version: '8.1'  # Specify the PHP version you need
 
     - name: Install Composer
-      run: curl -sS https://getcomposer.org/installer | php
-      # Optionally move Composer to a global location
-      run: mv composer.phar /usr/local/bin/composer
+      run: |
+        curl -sS https://getcomposer.org/installer | php
+        mv composer.phar /usr/local/bin/composer
 
     - name: Install dependencies
       run: composer install --no-dev --optimize-autoloader
@@ -40,7 +40,7 @@ jobs:
         set ssl:verify-certificate no;
         open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" $FTP_HOST;
         mirror -R --verbose \
-          --parallel=24 \
+          --parallel=10 \
           --exclude .git \
           --exclude .vscode \
           ./ $FTP_REMOTE_DIR
