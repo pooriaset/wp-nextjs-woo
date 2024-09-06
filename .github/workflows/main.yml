@@ -13,6 +13,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'  # Specify the PHP version you need
+
+    - name: Install Composer
+      run: curl -sS https://getcomposer.org/installer | php
+      # Optionally move Composer to a global location
+      run: mv composer.phar /usr/local/bin/composer
+
+    - name: Install dependencies
+      run: composer install --no-dev --optimize-autoloader
+
     - name: Install lftp
       run: sudo apt-get install -y lftp
 
@@ -27,7 +40,7 @@ jobs:
         set ssl:verify-certificate no;
         open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" $FTP_HOST;
         mirror -R --verbose \
-          --parallel=10 \
+          --parallel=24 \
           --exclude .git \
           --exclude .vscode \
           ./ $FTP_REMOTE_DIR
