@@ -13,6 +13,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'  # Specify the PHP version you need
+
+    - name: Install Composer
+      run: |
+        curl -sS https://getcomposer.org/installer | php
+        mv composer.phar /usr/local/bin/composer
+
+    - name: Install dependencies
+      run: composer install --no-dev --optimize-autoloader
+
     - name: Install lftp
       run: sudo apt-get install -y lftp
 
