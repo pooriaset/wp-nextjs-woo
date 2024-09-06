@@ -3,7 +3,7 @@ name: FTP Deploy
 on:
   push:
     branches:
-      - main
+      - main  # Specify the branch you want to trigger the action
 
 jobs:
   ftp-deploy:
@@ -21,10 +21,10 @@ jobs:
         FTP_HOST: ${{ secrets.FTP_HOST }}
         FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
         FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
+        FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }} # Secret for the remote directory
       run: |
         lftp -c "
         set ssl:verify-certificate no;
         open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" $FTP_HOST;
-        mirror -R --only-newer ./ $FTP_REMOTE_DIR --delete --verbose
+        mirror -R --only-newer ./ $FTP_REMOTE_DIR --exclude .git --exclude .vscode --delete --verbose
         "
