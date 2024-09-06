@@ -23,6 +23,8 @@ jobs:
         FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
       run: |
         lftp -c "
+        set ssl:verify-certificate no;
         open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" $FTP_HOST;
-        mirror -R ./ /wp-content/plugins --delete --verbose
+        mirror -R --only-newer ./ /wp-content/plugins --delete --verbose
         "
+
