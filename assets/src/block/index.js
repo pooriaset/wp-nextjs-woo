@@ -32,7 +32,7 @@ const blockConfig = /** @type {BlockConfig} */ (
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( 'nextjs-woo-plugin/block-name', {
+registerBlockType( 'WpNextJsWoo/block-name', {
 	...blockConfig,
 	icon: blockIcon,
 	/**

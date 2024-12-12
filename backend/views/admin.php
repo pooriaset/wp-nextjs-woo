@@ -6,7 +6,7 @@
  * This includes the header, options, and other information that should provide
  * The User Interface to the end user.
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
@@ -72,7 +72,7 @@
 
 	<div class="right-column-settings-page metabox-holder">
 		<div class="postbox">
-			<h3 class="hndle"><span><?php esc_html_e('nextjs-woo-plugin.', S_TEXTDOMAIN); ?></span></h3>
+			<h3 class="hndle"><span><?php esc_html_e('WpNextJsWoo.', S_TEXTDOMAIN); ?></span></h3>
 			<div class="inside">
 				<a href="https://github.com/WPBP/WordPress-Plugin-Boilerplate-Powered"><img src="https://raw.githubusercontent.com/WPBP/boilerplate-assets/master/icon-256x256.png" alt=""></a>
 			</div>

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace nextjs_woo_plugin\Backend;
+namespace WpNextJsWoo\Backend;
 
-use nextjs_woo_plugin\Engine\Base;
+use WpNextJsWoo\Engine\Base;
 
 /**
  * Create the settings page in the backend
@@ -62,7 +62,7 @@ class Settings_Page extends Base
 		 * Add a settings page for this plugin to the main menu
 		 *
 		 */
-		\add_menu_page(\__('nextjs-woo-plugin Settings', S_TEXTDOMAIN), S_NAME, 'manage_options', S_TEXTDOMAIN, array($this, 'display_plugin_admin_page'), 'dashicons-hammer', 90);
+		\add_menu_page(\__('WpNextJsWoo Settings', S_TEXTDOMAIN), S_NAME, 'manage_options', S_TEXTDOMAIN, array($this, 'display_plugin_admin_page'), 'dashicons-hammer', 90);
 	}
 
 	/**

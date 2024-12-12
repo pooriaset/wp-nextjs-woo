@@ -1,18 +1,18 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace nextjs_woo_plugin\Backend;
+namespace WpNextJsWoo\Backend;
 
-use nextjs_woo_plugin\Engine\Base;
+use WpNextJsWoo\Engine\Base;
 
 /**
  * Provide Import and Export of the settings of the plugin
@@ -68,7 +68,7 @@ class ImpExp extends Base
 
 		\nocache_headers();
 		\header('Content-Type: application/json; charset=utf-8');
-		\header('Content-Disposition: attachment; filename=nextjs_woo_plugin-settings-export-' . \gmdate('m-d-Y') . '.json');
+		\header('Content-Disposition: attachment; filename=WpNextJsWoo-settings-export-' . \gmdate('m-d-Y') . '.json');
 		\header('Expires: 0');
 
 		echo \wp_json_encode($settings, JSON_PRETTY_PRINT);

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace nextjs_woo_plugin\Backend;
+namespace WpNextJsWoo\Backend;
 
 use I18n_Notice_WordPressOrg;
-use nextjs_woo_plugin\Engine\Base;
+use WpNextJsWoo\Engine\Base;
 
 /**
  * Everything that involves notification on the WordPress dashboard
@@ -62,7 +62,7 @@ class Notices extends Base
 			new I18n_Notice_WordPressOrg(
 				array(
 					'textdomain'  => S_TEXTDOMAIN,
-					'nextjs_woo_plugin' => S_NAME,
+					'WpNextJsWoo' => S_NAME,
 					'hook'        => 'admin_notices',
 				),
 				true

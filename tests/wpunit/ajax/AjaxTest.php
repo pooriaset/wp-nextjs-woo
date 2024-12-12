@@ -1,6 +1,6 @@
 <?php
 
-namespace nextjs_woo_plugin\Tests\WPUnit;
+namespace WpNextJsWoo\Tests\WPUnit;
 
 class AjaxTest extends \Codeception\TestCase\WPAjaxTestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
 define('S_PLUGIN_ROOT', __DIR__);
-define('S_TEXTDOMAIN', 'nextjs-woo-plugin');
-define('S_NAME', 'nextjs-woo-plugin');
+define('S_TEXTDOMAIN', 'WpNextJsWoo');
+define('S_NAME', 'WpNextJsWoo');
 define('S_PLUGIN_ABSOLUTE', __DIR__);
 define('S_VERSION', '1.0.0');
 

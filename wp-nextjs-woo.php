@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  *
- * Plugin Name:     nextjs-woo-plugin
+ * Plugin Name:     WpNextJsWoo
  * Plugin URI:      @TODO
  * Description:     @TODO
  * Version:         1.0.0
  * Author:          Pooria Setayesh
  * Author URI:      
- * Text Domain:     nextjs-woo-plugin
+ * Text Domain:     WpNextJsWoo
  * License:         GPL 2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path:     /languages
@@ -27,8 +27,8 @@ if (!defined('ABSPATH')) {
 }
 
 define('S_VERSION', '1.0.0');
-define('S_TEXTDOMAIN', 'nextjs-woo-plugin');
-define('S_NAME', 'nextjs-woo-plugin');
+define('S_TEXTDOMAIN', 'WpNextJsWoo');
+define('S_NAME', 'WpNextJsWoo');
 define('S_PLUGIN_ROOT', plugin_dir_path(__FILE__));
 define('S_PLUGIN_ABSOLUTE', __FILE__);
 define('S_MIN_PHP_VERSION', '7.4');
@@ -54,7 +54,7 @@ if (version_compare(PHP_VERSION, S_MIN_PHP_VERSION, '<=')) {
 			echo wp_kses_post(
 				sprintf(
 					'<div class="notice notice-error"><p>%s</p></div>',
-					__('"nextjs-woo-plugin" requires PHP 5.6 or newer.', S_TEXTDOMAIN)
+					__('"WpNextJsWoo" requires PHP 5.6 or newer.', S_TEXTDOMAIN)
 				)
 			);
 		}
@@ -72,7 +72,7 @@ require_once S_PLUGIN_ROOT . 'functions/debug.php';
 // Add your new plugin on the wiki: https://github.com/WPBP/WordPress-Plugin-Boilerplate-Powered/wiki/Plugin-made-with-this-Boilerplate
 
 $requirements = new \Micropackage\Requirements\Requirements(
-	'nextjs-woo-plugin',
+	'WpNextJsWoo',
 	array(
 		'php'            => S_MIN_PHP_VERSION,
 		'php_extensions' => array('mbstring'),
@@ -105,14 +105,14 @@ function s_fs()
 		$s_fs = fs_dynamic_init(
 			array(
 				'id'             => '',
-				'slug'           => 'nextjs-woo-plugin',
+				'slug'           => 'WpNextJsWoo',
 				'public_key'     => '',
 				'is_live'        => false,
 				'is_premium'     => true,
 				'has_addons'     => false,
 				'has_paid_plans' => true,
 				'menu'           => array(
-					'slug' => 'nextjs-woo-plugin',
+					'slug' => 'WpNextJsWoo',
 				),
 			)
 		);
@@ -136,12 +136,12 @@ function s_fs()
 Puc_v4_Factory::buildUpdateChecker('https://github.com/user-name/repo-name/', __FILE__, 'unique-plugin-or-theme-slug');
 
 if (!wp_installing()) {
-	register_activation_hook(S_TEXTDOMAIN . '/' . S_TEXTDOMAIN . '.php', array(new \nextjs_woo_plugin\Backend\ActDeact, 'activate'));
-	register_deactivation_hook(S_TEXTDOMAIN . '/' . S_TEXTDOMAIN . '.php', array(new \nextjs_woo_plugin\Backend\ActDeact, 'deactivate'));
+	register_activation_hook(S_TEXTDOMAIN . '/' . S_TEXTDOMAIN . '.php', array(new \WpNextJsWoo\Backend\ActDeact, 'activate'));
+	register_deactivation_hook(S_TEXTDOMAIN . '/' . S_TEXTDOMAIN . '.php', array(new \WpNextJsWoo\Backend\ActDeact, 'deactivate'));
 	add_action(
 		'plugins_loaded',
 		static function () use ($nextjs_woo_plugin_libraries) {
-			new \nextjs_woo_plugin\Engine\Initialize($nextjs_woo_plugin_libraries);
+			new \WpNextJsWoo\Engine\Initialize($nextjs_woo_plugin_libraries);
 		}
 	);
 }

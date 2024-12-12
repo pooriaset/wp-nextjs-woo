@@ -1,16 +1,16 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace nextjs_woo_plugin\Internals;
+namespace WpNextJsWoo\Internals;
 
 /**
  * Create Shortcode and Gutenberg Block with Widget support
@@ -115,7 +115,7 @@ class ShortcodeBlock extends \WP_Super_Duper
 		\add_action(
 		'widgets_init',
 		static function() {
-			\register_widget( 'nextjs_woo_plugin\Internals\ShortCodeBlock' );
+			\register_widget( 'WpNextJsWoo\Internals\ShortCodeBlock' );
 		}
 		);
 		*/

@@ -19,7 +19,7 @@ parameters:
         # Does not work in "scanFiles"
         - vendor/wpbp/widgets-helper/class.wph-widget.php
     scanFiles:
-        - nextjs-woo-plugin.php
+        - WpNextJsWoo.php
         - uninstall.php
         - vendor/wpbp/i18n-notice/src/i18n-wordpressorg-v3.php
         - vendor/freemius/wordpress-sdk/start.php

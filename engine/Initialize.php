@@ -1,21 +1,21 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace nextjs_woo_plugin\Engine;
+namespace WpNextJsWoo\Engine;
 
-use nextjs_woo_plugin\Engine;
+use WpNextJsWoo\Engine;
 
 /**
- * nextjs_woo_plugin Initializer
+ * WpNextJsWoo Initializer
  */
 class Initialize
 {
@@ -146,10 +146,10 @@ class Initialize
 	{
 		$prefix          = $this->composer->getPrefixesPsr4();
 		$classmap        = $this->composer->getClassMap();
-		$namespacetofind = 'nextjs_woo_plugin\\' . $namespacetofind;
+		$namespacetofind = 'WpNextJsWoo\\' . $namespacetofind;
 
 		// In case composer has autoload optimized
-		if (isset($classmap['nextjs_woo_plugin\\Engine\\Initialize'])) {
+		if (isset($classmap['WpNextJsWoo\\Engine\\Initialize'])) {
 			$classes = \array_keys($classmap);
 
 			foreach ($classes as $class) {
@@ -172,7 +172,7 @@ class Initialize
 			$this->find_classes($php_files, $folder, $namespacetofind);
 
 			if (!WP_DEBUG) {
-				\wp_die(\esc_html__('nextjs-woo-plugin is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', S_TEXTDOMAIN));
+				\wp_die(\esc_html__('WpNextJsWoo is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', S_TEXTDOMAIN));
 			}
 
 			return $this->classes;

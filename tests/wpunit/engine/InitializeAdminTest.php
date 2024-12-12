@@ -1,6 +1,6 @@
 <?php
 
-namespace nextjs_woo_plugin\Tests\WPUnit;
+namespace WpNextJsWoo\Tests\WPUnit;
 
 class InitializeAdminTest extends \Codeception\TestCase\WPTestCase
 {
@@ -36,19 +36,19 @@ class InitializeAdminTest extends \Codeception\TestCase\WPTestCase
 		do_action('plugins_loaded');
 
 		$classes   = array();
-		$classes[] = 'nextjs_woo_plugin\Internals\PostTypes';
-		$classes[] = 'nextjs_woo_plugin\Internals\Shortcode';
-		$classes[] = 'nextjs_woo_plugin\Internals\Transient';
-		$classes[] = 'nextjs_woo_plugin\Integrations\CMB';
-		$classes[] = 'nextjs_woo_plugin\Integrations\Cron';
-		$classes[] = 'nextjs_woo_plugin\Integrations\Template';
-		$classes[] = 'nextjs_woo_plugin\Integrations\Widgets\My_Recent_Posts_Widget';
-		$classes[] = 'nextjs_woo_plugin\Backend\ActDeact';
-		$classes[] = 'nextjs_woo_plugin\Backend\Enqueue';
-		$classes[] = 'nextjs_woo_plugin\Backend\ImpExp';
-		$classes[] = 'nextjs_woo_plugin\Backend\Notices';
-		$classes[] = 'nextjs_woo_plugin\Backend\Pointers';
-		$classes[] = 'nextjs_woo_plugin\Backend\Settings_Page';
+		$classes[] = 'WpNextJsWoo\Internals\PostTypes';
+		$classes[] = 'WpNextJsWoo\Internals\Shortcode';
+		$classes[] = 'WpNextJsWoo\Internals\Transient';
+		$classes[] = 'WpNextJsWoo\Integrations\CMB';
+		$classes[] = 'WpNextJsWoo\Integrations\Cron';
+		$classes[] = 'WpNextJsWoo\Integrations\Template';
+		$classes[] = 'WpNextJsWoo\Integrations\Widgets\My_Recent_Posts_Widget';
+		$classes[] = 'WpNextJsWoo\Backend\ActDeact';
+		$classes[] = 'WpNextJsWoo\Backend\Enqueue';
+		$classes[] = 'WpNextJsWoo\Backend\ImpExp';
+		$classes[] = 'WpNextJsWoo\Backend\Notices';
+		$classes[] = 'WpNextJsWoo\Backend\Pointers';
+		$classes[] = 'WpNextJsWoo\Backend\Settings_Page';
 
 		$all_classes = get_declared_classes();
 		foreach ($classes as $class) {
@@ -66,8 +66,8 @@ class InitializeAdminTest extends \Codeception\TestCase\WPTestCase
 		do_action('plugins_loaded');
 
 		$classes   = array();
-		$classes[] = 'nextjs_woo_plugin\Ajax\Ajax';
-		$classes[] = 'nextjs_woo_plugin\Ajax\Ajax_Admin';
+		$classes[] = 'WpNextJsWoo\Ajax\Ajax';
+		$classes[] = 'WpNextJsWoo\Ajax\Ajax_Admin';
 
 		$all_classes = get_declared_classes();
 		foreach ($classes as $class) {

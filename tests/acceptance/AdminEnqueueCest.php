@@ -12,16 +12,16 @@ class AdminEnqueueCest
 	function enqueue_admin_scripts(AcceptanceTester $I)
 	{
 		$I->wantTo('access to the plugin settings page and check the scripts enqueue');
-		$I->amOnPage('/wp-admin/admin.php?page=nextjs-woo-plugin');
-		$I->seeInPageSource('nextjs-woo-plugin-settings-script');
-		$I->seeInPageSource('nextjs-woo-plugin-admin-script');
+		$I->amOnPage('/wp-admin/admin.php?page=WpNextJsWoo');
+		$I->seeInPageSource('WpNextJsWoo-settings-script');
+		$I->seeInPageSource('WpNextJsWoo-admin-script');
 	}
 
 	function enqueue_admin_styles(AcceptanceTester $I)
 	{
 		$I->wantTo('access to the plugin settings page and check the style enqueue');
-		$I->amOnPage('/wp-admin/admin.php?page=nextjs-woo-plugin');
-		$I->seeInPageSource('nextjs-woo-plugin-settings-styles-css');
-		$I->seeInPageSource('nextjs-woo-plugin-admin-styles-css');
+		$I->amOnPage('/wp-admin/admin.php?page=WpNextJsWoo');
+		$I->seeInPageSource('WpNextJsWoo-settings-styles-css');
+		$I->seeInPageSource('WpNextJsWoo-admin-styles-css');
 	}
 }

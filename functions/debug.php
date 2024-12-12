@@ -1,16 +1,16 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-$s_debug = new WPBP_Debug(__('nextjs-woo-plugin', S_TEXTDOMAIN));
+$s_debug = new WPBP_Debug(__('WpNextJsWoo', S_TEXTDOMAIN));
 
 /**
  * Log text inside the debugging plugins.

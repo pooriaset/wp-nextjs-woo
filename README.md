@@ -1,1 +1,1 @@
-nextjs-woo-plugin
+WpNextJsWoo

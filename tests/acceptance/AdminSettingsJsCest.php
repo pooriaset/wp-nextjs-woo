@@ -12,7 +12,7 @@ class AdminSettingsJsCest
 	{
 		$I->am('administrator');
 		$I->wantTo('access to the plugin settings and see the tabs working');
-		$I->amOnPage('/wp-admin/admin.php?page=nextjs-woo-plugin');
+		$I->amOnPage('/wp-admin/admin.php?page=WpNextJsWoo');
 		$I->seeElement('.ui-tabs');
 		$I->click('#ui-id-2');
 		$I->seeElement('#tabs-2');

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * nextjs_woo_plugin
+ * WpNextJsWoo
  *
- * @package   nextjs_woo_plugin
+ * @package  WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
  * @link      
  */
 
-namespace nextjs_woo_plugin\Woocommerce;
+namespace WpNextJsWoo\Woocommerce;
 
-use nextjs_woo_plugin\Engine\Base;
+use WpNextJsWoo\Engine\Base;
 
 class CustomMetaData extends Base
 {

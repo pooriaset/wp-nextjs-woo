@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "nextjs-woo-plugin/block-name",
+	"name": "WpNextJsWoo/block-name",
 	"title": "block_name",
 	"category": "text",
 	"editorScript": "file:./build/plugin-block.js",

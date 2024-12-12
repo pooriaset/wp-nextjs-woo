@@ -1,6 +1,6 @@
 {
   "plugin": {
-    "name": "nextjs-woo-plugin",
+    "name": "WpNextJsWoo",
     "version": "1.0.0"
   },
   "author": {

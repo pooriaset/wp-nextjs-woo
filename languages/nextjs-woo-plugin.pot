@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TODO 1.0.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/plugins/nextjs-woo-plugin\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/plugins/WpNextJsWoo\n"
 "POT-Creation-Date: 2020-05-21 19:28+0200\n"
 "PO-Revision-Date: 2014-07-07 18:52+0100\n"
 "Last-Translator: Mte90 <mte90net@gmail.com>\n"
@@ -48,7 +48,7 @@ msgid "Click here to review"
 msgstr ""
 
 #: admin/class-admin-settings-page.php:57
-msgid "nextjs-woo-plugin Settings"
+msgid "WpNextJsWoo Settings"
 msgstr ""
 
 #: admin/class-admin-settings-page.php:83 admin/views/admin.php:22
@@ -96,7 +96,7 @@ msgid "Import"
 msgstr ""
 
 #: admin/views/admin.php:78
-msgid "nextjs-woo-plugin."
+msgid "WpNextJsWoo."
 msgstr ""
 
 #: admin/views/settings-2.php:15 admin/views/settings.php:14
@@ -389,11 +389,11 @@ msgid "Demo Categories"
 msgstr ""
 
 #: internals/debug.php:12
-msgid "nextjs-woo-plugin"
+msgid "WpNextJsWoo"
 msgstr ""
 
-#: nextjs-woo-plugin.php:64
-msgid "\"nextjs-woo-plugin\" requires PHP 5.6 or newer."
+#: WpNextJsWoo.php:64
+msgid "\"WpNextJsWoo\" requires PHP 5.6 or newer."
 msgstr ""
 
 #: public/class-enqueue.php:77
