@@ -15,7 +15,7 @@ namespace WpNextJsWoo\Graphql;
 use WpNextJsWoo\Engine\Base;
 
 
-class GraphqlJWT extends Base
+class GraphqlWoo extends Base
 {
 
     /**
@@ -26,11 +26,13 @@ class GraphqlJWT extends Base
     public function initialize()
     {
         parent::initialize();
-        add_filter('graphql_jwt_auth_expire', array($this, "custom_jwt_expiration"), 10);
+        add_filter('graphql_is_generate_woocommerce_session_token', array($this, "graphql_is_generate_woocommerce_session_token"), 10);
     }
 
-    public function custom_jwt_expiration($expiration)
+    public function graphql_is_generate_woocommerce_session_token()
     {
-        return 1 * 24 * 60 * 60;
+        $method = $_SERVER['REQUEST_METHOD'];
+        $headers = getallheaders();
+        return  $method !== "OPTIONS" && !isset($headers['x-server-side']);
     }
 }
