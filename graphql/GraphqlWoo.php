@@ -26,12 +26,12 @@ class GraphqlWoo extends Base
     public function initialize()
     {
         parent::initialize();
-        add_filter('graphql_is_generate_woocommerce_session_token', array($this, "graphql_is_generate_woocommerce_session_token"), 10);
+        add_filter('graphql_generate_woocommerce_session_token_condition', array($this, "graphql_generate_woocommerce_session_token_condition"), 10);
         add_filter('wc_session_expiring', array($this, "wc_session_expiring"), 10);
         add_filter('wc_session_expiration', array($this, "wc_session_expiration"), 10);
     }
 
-    public function graphql_is_generate_woocommerce_session_token()
+    public function graphql_generate_woocommerce_session_token_condition()
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $headers = getallheaders();
