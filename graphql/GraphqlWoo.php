@@ -40,12 +40,13 @@ class GraphqlWoo extends Base
 
     public function wc_session_expiring()
     {
-        return time() +   60 * 60 * 24 * 7 - 1;
+        return time() +   (60 * 60 * 24 * 7) - (1 * 60 * 60);
     }
 
 
     public function wc_session_expiration()
     {
+        // 7 days
         return time() +   60 * 60 * 24 * 7;
     }
 }
