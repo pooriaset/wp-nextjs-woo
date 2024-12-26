@@ -43,7 +43,7 @@ class Base
             global $wp;
             $order_id  = absint($wp->query_vars['order-received']);    
             
-            $new_url = WP_NEXTJS_HOST .'/profile/orders/' . $order_id . '/successful-payment';
+            $new_url = WP_NEXTJS_HOST .'/profile/orders/' . $order_id . '/payment/successful';
     
             wp_redirect($new_url, 301);
             exit;
