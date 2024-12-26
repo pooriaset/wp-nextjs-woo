@@ -31,7 +31,7 @@ class Base
 	public function initialize()
 	{
 		$this->settings = \s_get_settings();
-		add_action('wp', array($this, 'headlesswp_frontend_redirect'));
+		// add_action('wp', array($this, 'headlesswp_frontend_redirect'));
 
 		return true;
 	}
