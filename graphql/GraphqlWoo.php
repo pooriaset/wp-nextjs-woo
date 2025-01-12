@@ -33,9 +33,8 @@ class GraphqlWoo extends Base
 
     public function graphql_generate_woocommerce_session_token_condition()
     {
-        $method = $_SERVER['REQUEST_METHOD'];
         $headers = getallheaders();
-        return  $method !== "OPTIONS" && !isset($headers['x-server-side']);
+        return  isset($headers['x-generate-session']);
     }
 
     public function wc_session_expiring()
@@ -50,5 +49,3 @@ class GraphqlWoo extends Base
         return time() +   60 * 60 * 24 * 7;
     }
 }
-
-
