@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package  WpNextJsWoo
+ * @package   WpNextJsWoo
  * @author    Pooria Setayesh <pooriaset@yahoo.com>
  * @copyright 2022 Shop
  * @license   GPL 2.0+
@@ -23,7 +23,7 @@
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
-	die('We\'re sorry, but you can not directly access this file.');
+    die('We\'re sorry, but you can not directly access this file.');
 }
 
 define('S_VERSION', '1.0.0');
@@ -35,33 +35,33 @@ define('S_MIN_PHP_VERSION', '7.4');
 define('S_WP_VERSION', '5.3');
 
 add_action(
-	'init',
-	static function () {
-		load_plugin_textdomain(S_TEXTDOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages');
-	}
+    'init',
+    static function () {
+        load_plugin_textdomain(S_TEXTDOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages');
+    }
 );
 
 if (version_compare(PHP_VERSION, S_MIN_PHP_VERSION, '<=')) {
-	add_action(
-		'admin_init',
-		static function () {
-			deactivate_plugins(plugin_basename(__FILE__));
-		}
-	);
-	add_action(
-		'admin_notices',
-		static function () {
-			echo wp_kses_post(
-				sprintf(
-					'<div class="notice notice-error"><p>%s</p></div>',
-					__('"WpNextJsWoo" requires PHP 5.6 or newer.', S_TEXTDOMAIN)
-				)
-			);
-		}
-	);
+    add_action(
+        'admin_init',
+        static function () {
+            deactivate_plugins(plugin_basename(__FILE__));
+        }
+    );
+    add_action(
+        'admin_notices',
+        static function () {
+            echo wp_kses_post(
+                sprintf(
+                    '<div class="notice notice-error"><p>%s</p></div>',
+                    __('"WpNextJsWoo" requires PHP 5.6 or newer.', S_TEXTDOMAIN)
+                )
+            );
+        }
+    );
 
-	// Return early to prevent loading the plugin.
-	return;
+    // Return early to prevent loading the plugin.
+    return;
 }
 
 $nextjs_woo_plugin_libraries = require S_PLUGIN_ROOT . 'vendor/autoload.php'; //phpcs:ignore
@@ -72,21 +72,21 @@ require_once S_PLUGIN_ROOT . 'functions/debug.php';
 // Add your new plugin on the wiki: https://github.com/WPBP/WordPress-Plugin-Boilerplate-Powered/wiki/Plugin-made-with-this-Boilerplate
 
 $requirements = new \Micropackage\Requirements\Requirements(
-	'WpNextJsWoo',
-	array(
-		'php'            => S_MIN_PHP_VERSION,
-		'php_extensions' => array('mbstring'),
-		'wp'             => S_WP_VERSION,
-		// 'plugins'            => array(
-		// array( 'file' => 'hello-dolly/hello.php', 'name' => 'Hello Dolly', 'version' => '1.5' )
-		// ),
-	)
+    'WpNextJsWoo',
+    array(
+        'php'            => S_MIN_PHP_VERSION,
+        'php_extensions' => array('mbstring'),
+        'wp'             => S_WP_VERSION,
+        // 'plugins'            => array(
+        // array( 'file' => 'hello-dolly/hello.php', 'name' => 'Hello Dolly', 'version' => '1.5' )
+        // ),
+    )
 );
 
 if (!$requirements->satisfied()) {
-	$requirements->print_notice();
+    $requirements->print_notice();
 
-	return;
+    return;
 }
 
 
@@ -98,36 +98,36 @@ if (!$requirements->satisfied()) {
  */
 function s_fs()
 {
-	global $s_fs;
+    global $s_fs;
 
-	if (!isset($s_fs)) {
-		require_once S_PLUGIN_ROOT . 'vendor/freemius/wordpress-sdk/start.php';
-		$s_fs = fs_dynamic_init(
-			array(
-				'id'             => '',
-				'slug'           => 'WpNextJsWoo',
-				'public_key'     => '',
-				'is_live'        => false,
-				'is_premium'     => true,
-				'has_addons'     => false,
-				'has_paid_plans' => true,
-				'menu'           => array(
-					'slug' => 'WpNextJsWoo',
-				),
-			)
-		);
+    if (!isset($s_fs)) {
+        include_once S_PLUGIN_ROOT . 'vendor/freemius/wordpress-sdk/start.php';
+        $s_fs = fs_dynamic_init(
+            array(
+            'id'             => '',
+            'slug'           => 'WpNextJsWoo',
+            'public_key'     => '',
+            'is_live'        => false,
+            'is_premium'     => true,
+            'has_addons'     => false,
+            'has_paid_plans' => true,
+            'menu'           => array(
+            'slug' => 'WpNextJsWoo',
+            ),
+            )
+        );
 
-		if ($s_fs->is_premium()) {
-			$s_fs->add_filter(
-				'support_forum_url',
-				static function ($wp_org_support_forum_url) { //phpcs:ignore
-					return 'https://your-url.test';
-				}
-			);
-		}
-	}
+        if ($s_fs->is_premium()) {
+            $s_fs->add_filter(
+                'support_forum_url',
+             static function ($wp_org_support_forum_url) { //phpcs:ignore
+                return 'https://your-url.test';
+             }
+            );
+        }
+    }
 
-	return $s_fs;
+    return $s_fs;
 }
 
 // s_fs();
@@ -136,12 +136,12 @@ function s_fs()
 Puc_v4_Factory::buildUpdateChecker('https://github.com/user-name/repo-name/', __FILE__, 'unique-plugin-or-theme-slug');
 
 if (!wp_installing()) {
-	register_activation_hook(S_TEXTDOMAIN . '/' . S_TEXTDOMAIN . '.php', array(new \WpNextJsWoo\Backend\ActDeact, 'activate'));
-	register_deactivation_hook(S_TEXTDOMAIN . '/' . S_TEXTDOMAIN . '.php', array(new \WpNextJsWoo\Backend\ActDeact, 'deactivate'));
-	add_action(
-		'plugins_loaded',
-		static function () use ($nextjs_woo_plugin_libraries) {
-			new \WpNextJsWoo\Engine\Initialize($nextjs_woo_plugin_libraries);
-		}
-	);
+    register_activation_hook(S_PLUGIN_ABSOLUTE, array(new \WpNextJsWoo\Backend\ActDeact, 'activate'));
+    register_deactivation_hook(S_PLUGIN_ABSOLUTE, array(new \WpNextJsWoo\Backend\ActDeact, 'deactivate'));
+    add_action(
+        'plugins_loaded',
+        static function () use ($nextjs_woo_plugin_libraries) {
+            new \WpNextJsWoo\Engine\Initialize($nextjs_woo_plugin_libraries);
+        }
+    );
 }
