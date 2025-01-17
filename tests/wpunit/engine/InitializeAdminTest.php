@@ -46,7 +46,6 @@ class InitializeAdminTest extends \Codeception\TestCase\WPTestCase
 		$classes[] = 'WpNextJsWoo\Backend\ActDeact';
 		$classes[] = 'WpNextJsWoo\Backend\Enqueue';
 		$classes[] = 'WpNextJsWoo\Backend\ImpExp';
-		$classes[] = 'WpNextJsWoo\Backend\Notices';
 		$classes[] = 'WpNextJsWoo\Backend\Pointers';
 		$classes[] = 'WpNextJsWoo\Backend\Settings_Page';
 
