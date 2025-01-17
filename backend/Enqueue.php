@@ -75,15 +75,15 @@ class Enqueue extends Base
 		$admin_page = \get_current_screen();
 		$styles     = array();
 
-		if (!\is_null($admin_page) && 'toplevel_page_nextjs-woo-plugin' === $admin_page->id) {
-			$styles[0] = new Style(S_TEXTDOMAIN . '-settings-style', \plugins_url('assets/build/plugin-settings.css', S_PLUGIN_ABSOLUTE));
-			$styles[0]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
-			$styles[0]->withDependencies('dashicons');
-		}
+		// if (!\is_null($admin_page) && 'toplevel_page_nextjs-woo-plugin' === $admin_page->id) {
+		// 	$styles[0] = new Style(S_TEXTDOMAIN . '-settings-style', \plugins_url('assets/build/plugin-settings.css', S_PLUGIN_ABSOLUTE));
+		// 	$styles[0]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
+		// 	$styles[0]->withDependencies('dashicons');
+		// }
 
-		$styles[1] = new Style(S_TEXTDOMAIN . '-admin-style', \plugins_url('assets/build/plugin-admin.css', S_PLUGIN_ABSOLUTE));
-		$styles[1]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
-		$styles[1]->withDependencies('dashicons');
+		// $styles[1] = new Style(S_TEXTDOMAIN . '-admin-style', \plugins_url('assets/build/plugin-admin.css', S_PLUGIN_ABSOLUTE));
+		// $styles[1]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
+		// $styles[1]->withDependencies('dashicons');
 
 		return $styles;
 	}
@@ -99,20 +99,20 @@ class Enqueue extends Base
 		$admin_page = \get_current_screen();
 		$scripts    = array();
 
-		if (!\is_null($admin_page) && 'toplevel_page_nextjs-woo-plugin' === $admin_page->id) {
-			$scripts[0] = new Script(S_TEXTDOMAIN . '-settings-script', \plugins_url('assets/build/plugin-settings.js', S_PLUGIN_ABSOLUTE));
-			$scripts[0]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
-			$scripts[0]->withDependencies('jquery-ui-tabs');
-			$scripts[0]->canEnqueue(
-				function () {
-					return \current_user_can('manage_options');
-				}
-			);
-		}
+		// if (!\is_null($admin_page) && 'toplevel_page_nextjs-woo-plugin' === $admin_page->id) {
+		// 	$scripts[0] = new Script(S_TEXTDOMAIN . '-settings-script', \plugins_url('assets/build/plugin-settings.js', S_PLUGIN_ABSOLUTE));
+		// 	$scripts[0]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
+		// 	$scripts[0]->withDependencies('jquery-ui-tabs');
+		// 	$scripts[0]->canEnqueue(
+		// 		function () {
+		// 			return \current_user_can('manage_options');
+		// 		}
+		// 	);
+		// }
 
-		$scripts[1] = new Script(S_TEXTDOMAIN . '-settings-admin', \plugins_url('assets/build/plugin-admin.js', S_PLUGIN_ABSOLUTE));
-		$scripts[1]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
-		$scripts[1]->dependencies();
+		// $scripts[1] = new Script(S_TEXTDOMAIN . '-settings-admin', \plugins_url('assets/build/plugin-admin.js', S_PLUGIN_ABSOLUTE));
+		// $scripts[1]->forLocation(Asset::BACKEND)->withVersion(S_VERSION);
+		// $scripts[1]->dependencies();
 
 		return $scripts;
 	}
