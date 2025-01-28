@@ -77,32 +77,22 @@ class CustomMetaData extends Base
     public function calculate_and_save_discounts($post_id)
     {
         if (get_post_type($post_id) == 'product' || get_post_type($post_id) == 'product_variation') {
-            $max_discount_amount = 0;
-            $max_discount_percentage = 0;
-
             $product = wc_get_product($post_id);
+
             if ($product->is_type('variable')) {
-                // Loop through variations
                 $variations = $product->get_children();
                 foreach ($variations as $variation_id) {
-                    ['amount' => $amount, "percentage" => $percentage]  = self::calculate_discount($variation_id);
+                    ['amount' => $amount, "percentage" => $percentage] = self::calculate_discount($variation_id);
 
-                    if ($amount > $max_discount_amount) {
-                        $max_discount_amount = $amount;
-                    }
-                    if ($percentage > $max_discount_percentage) {
-                        $max_discount_percentage = $percentage;
-                    }
+                    update_post_meta($variation_id, '_discount_amount', $amount);
+                    update_post_meta($variation_id, '_discount_percentage', $percentage);
                 }
             } else {
-                ['amount' => $amount, "percentage" => $percentage]  = self::calculate_discount($post_id);
-                $max_discount_amount = $amount;
-                $max_discount_percentage = $percentage;
-            }
+                ['amount' => $amount, "percentage" => $percentage] = self::calculate_discount($post_id);
 
-            // Save the maximum discount values
-            update_post_meta($post_id, '_discount_amount', $max_discount_amount);
-            update_post_meta($post_id, '_discount_percentage', $max_discount_percentage);
+                update_post_meta($post_id, '_discount_amount', $amount);
+                update_post_meta($post_id, '_discount_percentage', $percentage);
+            }
         }
     }
 
