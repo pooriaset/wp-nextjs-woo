@@ -78,21 +78,26 @@ class CustomMetaData extends Base
     {
         if (get_post_type($post_id) == 'product' || get_post_type($post_id) == 'product_variation') {
             $product = wc_get_product($post_id);
+            $variations = $product->get_children();
 
-            if ($product->is_type('variable')) {
-                $variations = $product->get_children();
-                foreach ($variations as $variation_id) {
-                    ['amount' => $amount, "percentage" => $percentage] = self::calculate_discount($variation_id);
+            $max_discount_percentage = 0;
+            $max_discount_amount = 0;
 
-                    update_post_meta($variation_id, '_discount_amount', $amount);
-                    update_post_meta($variation_id, '_discount_percentage', $percentage);
+            foreach ($variations as $variation_id) {
+                ['amount' => $amount, "percentage" => $percentage] = self::calculate_discount($variation_id);
+
+
+                if ($percentage > $max_discount_percentage) {
+                    $max_discount_percentage = $percentage;
+                    $max_discount_amount = $amount;
                 }
-            } else {
-                ['amount' => $amount, "percentage" => $percentage] = self::calculate_discount($post_id);
 
-                update_post_meta($post_id, '_discount_amount', $amount);
-                update_post_meta($post_id, '_discount_percentage', $percentage);
+                update_post_meta($variation_id, '_discount_amount', $amount);
+                update_post_meta($variation_id, '_discount_percentage', $percentage);
             }
+
+            update_post_meta($post_id, '_discount_amount', $max_discount_amount);
+            update_post_meta($post_id, '_discount_percentage', $max_discount_percentage);
         }
     }
 
