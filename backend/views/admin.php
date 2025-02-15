@@ -34,7 +34,26 @@
 		?>
 		<?php
 		?>
+
+
+
 		<div id="tabs-3" class="metabox-holder">
+
+
+			<div class="postbox">
+				<h3 class="hndle"><span><?php esc_html_e('Update Products', S_TEXTDOMAIN); ?></span></h3>
+				<div class="inside">
+					<p><?php esc_html_e('Update All Products Metadata', S_TEXTDOMAIN); ?></p>
+					<form method="post">
+						<p><input type="hidden" name="s_action" value="update_product_metadata" /></p>
+						<p>
+							<?php wp_nonce_field('s_update_nonce', 's_update_nonce'); ?>
+							<?php submit_button(__('Update', S_TEXTDOMAIN), 'secondary', 'submit', false); ?>
+						</p>
+					</form>
+				</div>
+			</div>
+
 			<div class="postbox">
 				<h3 class="hndle"><span><?php esc_html_e('Export Settings', S_TEXTDOMAIN); ?></span></h3>
 				<div class="inside">

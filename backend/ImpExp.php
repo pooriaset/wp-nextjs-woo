@@ -12,7 +12,9 @@
 
 namespace WpNextJsWoo\Backend;
 
+use WP_Query;
 use WpNextJsWoo\Engine\Base;
+use WpNextJsWoo\Woocommerce\CustomMetaData;
 
 /**
  * Provide Import and Export of the settings of the plugin
@@ -39,7 +41,47 @@ class ImpExp extends Base
 		\add_action('admin_init', array($this, 'settings_export'));
 		// Add the import settings method
 		\add_action('admin_init', array($this, 'settings_import'));
+		// Add the update metadata methid
+		\add_action('admin_init', array($this, 'upadte_product_metadata'));
 	}
+
+	/**
+	 * upadte product metadata
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function upadte_product_metadata()
+	{
+		if (
+			empty($_POST['s_action']) || //phpcs:ignore WordPress.Security.NonceVerification
+			'update_product_metadata' !== \sanitize_text_field(\wp_unslash($_POST['s_action'])) //phpcs:ignore WordPress.Security.NonceVerification
+		) {
+			return;
+		}
+
+		if (!\wp_verify_nonce(\sanitize_text_field(\wp_unslash($_POST['s_update_nonce'])), 's_update_nonce')) { //phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			return;
+		}
+
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page' => -1
+		);
+
+		$products = new WP_Query($args);
+
+		if ($products->have_posts()) {
+			while ($products->have_posts()) {
+				$product_id = get_the_ID();
+				CustomMetaData::calculate_and_save_discounts($product_id);
+			}
+			wp_reset_postdata();
+		}
+
+		exit; // phpcs:ignore
+	}
+
 
 	/**
 	 * Process a settings export from config
