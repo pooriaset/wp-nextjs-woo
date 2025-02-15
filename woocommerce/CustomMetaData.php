@@ -25,11 +25,11 @@ class CustomMetaData extends Base
     public function initialize()
     {
         parent::initialize();
-        add_action('save_post', array($this, 'calculate_and_save_discounts'));
-        add_action('woocommerce_product_set_stock_status', array($this, 'calculate_and_save_discounts'));
-        add_action('woocommerce_variation_set_stock_status', array($this, 'calculate_and_save_discounts'));
-        add_action('woocommerce_save_product_variation', array($this, 'calculate_and_save_discounts'));
-        add_action('woocommerce_update_product', array($this, 'calculate_and_save_discounts'), 10, 1);
+        add_action('save_post', array($this, 'save_post'));
+        add_action('woocommerce_product_set_stock_status', array($this, 'save_post'));
+        add_action('woocommerce_variation_set_stock_status', array($this, 'save_post'));
+        add_action('woocommerce_save_product_variation', array($this, 'save_post'));
+        add_action('woocommerce_after_product_object_save', array($this, 'woocommerce_after_product_object_save'), 10, 1);
 
 
         // Graphql
@@ -75,7 +75,7 @@ class CustomMetaData extends Base
         ]);
     }
 
-    public function calculate_and_save_discounts($post_id)
+    public static function calculate_and_save_discounts($post_id)
     {
         if (get_post_type($post_id) == 'product' || get_post_type($post_id) == 'product_variation') {
             $product = wc_get_product($post_id);
@@ -100,6 +100,17 @@ class CustomMetaData extends Base
             update_post_meta($post_id, '_discount_amount', $max_discount_amount);
             update_post_meta($post_id, '_discount_percentage', $max_discount_percentage);
         }
+    }
+
+    public function woocommerce_after_product_object_save($product, $data_store)
+    {
+        $product_id = $product->get_id();
+        self::calculate_and_save_discounts($product_id);
+    }
+
+    public function save_post($post_id)
+    {
+        self::calculate_and_save_discounts($post_id);
     }
 
     public function register_custom_meta_data_properties()
