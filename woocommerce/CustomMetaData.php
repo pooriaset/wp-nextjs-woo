@@ -29,8 +29,6 @@ class CustomMetaData extends Base
         add_action('woocommerce_product_set_stock_status', array($this, 'save_post'));
         add_action('woocommerce_variation_set_stock_status', array($this, 'save_post'));
         add_action('woocommerce_save_product_variation', array($this, 'save_post'));
-        add_action('woocommerce_after_product_object_save', array($this, 'woocommerce_after_product_object_save'), 10, 2);
-
 
         // Graphql
         add_action('graphql_register_types', array($this, "register_custom_meta_data_properties"));
@@ -100,12 +98,6 @@ class CustomMetaData extends Base
             update_post_meta($post_id, '_discount_amount', $max_discount_amount);
             update_post_meta($post_id, '_discount_percentage', $max_discount_percentage);
         }
-    }
-
-    public function woocommerce_after_product_object_save($product, $data_store)
-    {
-        $product_id = $product->get_id();
-        self::calculate_and_save_discounts($product_id);
     }
 
     public function save_post($post_id)
