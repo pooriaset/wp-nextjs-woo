@@ -29,6 +29,7 @@ class CustomMetaData extends Base
         add_action('woocommerce_product_set_stock_status', array($this, 'calculate_and_save_discounts'));
         add_action('woocommerce_variation_set_stock_status', array($this, 'calculate_and_save_discounts'));
         add_action('woocommerce_save_product_variation', array($this, 'calculate_and_save_discounts'));
+        add_action('woocommerce_update_product', array($this, 'calculate_and_save_discounts'), 10, 1);
 
 
         // Graphql
