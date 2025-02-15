@@ -27,9 +27,24 @@ class CustomMetaData extends Base
         parent::initialize();
         add_action('save_post', array($this, 'save_post'));
 
+        add_action('woocommerce_product_duplicate', array($this, 'clear_discount_meta_on_duplicate'), 10, 2);
+
         // Graphql
         add_action('graphql_register_types', array($this, "register_custom_meta_data_properties"));
         add_action('graphql_register_types', array($this, "add_total_on_sale_discount_amount_to_cart_item"));
+    }
+
+
+    public function clear_discount_meta_on_duplicate($duplicate_product, $original_product)
+    {
+        delete_post_meta($duplicate_product->get_id(), '_discount_amount');
+        delete_post_meta($duplicate_product->get_id(), '_discount_percentage');
+
+        $variations = $duplicate_product->get_children();
+        foreach ($variations as $variation_id) {
+            delete_post_meta($variation_id, '_discount_amount');
+            delete_post_meta($variation_id, '_discount_percentage');
+        }
     }
 
     /**
