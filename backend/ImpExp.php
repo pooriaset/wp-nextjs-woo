@@ -69,7 +69,19 @@ class ImpExp extends Base
 
 		$args = array(
 			'post_type' => 'product',
-			'posts_per_page' => -1
+			'posts_per_page' => -1,
+			'meta_query' => array(
+				'relation' => 'OR', // Use 'OR' to match either condition
+				array(
+					'key' => '_discount_percentage',
+					'compare' => 'NOT EXISTS', // Products without the meta key
+				),
+				array(
+					'key' => '_discount_percentage',
+					'value' => '0', // Products with the meta key value set to 0
+					'compare' => '=',
+				),
+			),
 		);
 
 		$products = new WP_Query($args);
