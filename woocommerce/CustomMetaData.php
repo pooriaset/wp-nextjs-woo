@@ -72,6 +72,12 @@ class CustomMetaData extends Base
 
     public static function calculate_and_save_discounts($post_id)
     {
+        if (get_transient('calculating_discounts_' . $post_id)) {
+            return;
+        }
+
+        set_transient('calculating_discounts_' . $post_id, true, 10);
+
         if (get_post_type($post_id) == 'product' || get_post_type($post_id) == 'product_variation') {
             $product = wc_get_product($post_id);
             $variations = $product->get_children();
