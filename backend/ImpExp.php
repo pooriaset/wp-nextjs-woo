@@ -67,31 +67,28 @@ class ImpExp extends Base
 
 		set_time_limit(0);
 
-		$args = array(
-			'post_type' => 'product',
+		$query = new WP_Query(array(
 			'posts_per_page' => -1,
+			"post_status" => "any",
+			'post_type' => 'product',
 			'meta_query' => array(
-				'relation' => 'OR', // Use 'OR' to match either condition
+				'relation' => 'OR',
 				array(
 					'key' => '_discount_percentage',
-					'compare' => 'NOT EXISTS', // Products without the meta key
+					'compare' => 'NOT EXISTS',
 				),
 				array(
 					'key' => '_discount_percentage',
-					'value' => '0', // Products with the meta key value set to 0
+					'value' => '0',
 					'compare' => '=',
 				),
 			),
-		);
+		));
 
-		$products = new WP_Query($args);
-
-		if ($products->have_posts()) {
-			while ($products->have_posts()) {
-				$product_id = get_the_ID();
-				CustomMetaData::calculate_and_save_discounts($product_id);
-			}
-			wp_reset_postdata();
+		$products = $query->posts;
+		foreach ($products as $product) {
+			$product_id = $product->ID;
+			CustomMetaData::calculate_and_save_discounts($product_id);
 		}
 	}
 
