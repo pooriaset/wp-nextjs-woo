@@ -26,9 +26,6 @@ class CustomMetaData extends Base
     {
         parent::initialize();
         add_action('save_post', array($this, 'save_post'));
-        add_action('woocommerce_product_set_stock_status', array($this, 'save_post'));
-        add_action('woocommerce_variation_set_stock_status', array($this, 'save_post'));
-        add_action('woocommerce_save_product_variation', array($this, 'save_post'));
 
         // Graphql
         add_action('graphql_register_types', array($this, "register_custom_meta_data_properties"));
