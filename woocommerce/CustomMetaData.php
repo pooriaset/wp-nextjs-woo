@@ -25,8 +25,10 @@ class CustomMetaData extends Base
     public function initialize()
     {
         parent::initialize();
-        add_action('save_post', array($this, 'save_post'));
+        // add_action('save_post', array($this, 'save_post'));
+        add_action('updated_post_meta', array($this, 'my_product_price_update_hook'), 10, 4);
         add_filter('woocommerce_duplicate_product_exclude_meta', array($this, 'exclude_custom_meta_from_duplication'));
+
 
         // Graphql
         add_action('graphql_register_types', array($this, "register_custom_meta_data_properties"));
@@ -113,9 +115,15 @@ class CustomMetaData extends Base
         }
     }
 
-    public function save_post($post_id)
+    public function my_product_price_update_hook($meta_id, $post_id, $meta_key, $meta_value)
     {
-        self::calculate_and_save_discounts($post_id);
+        if (get_post_type($post_id) !== 'product') {
+            return;
+        }
+
+        if ($meta_key === '_regular_price' || $meta_key === "_sale_price") {
+            self::calculate_and_save_discounts($post_id);
+        }
     }
 
     public function register_custom_meta_data_properties()
