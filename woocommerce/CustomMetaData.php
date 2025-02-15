@@ -25,8 +25,7 @@ class CustomMetaData extends Base
     public function initialize()
     {
         parent::initialize();
-        // add_action('save_post', array($this, 'save_post'));
-        add_action('updated_post_meta', array($this, 'my_product_price_update_hook'), 10, 4);
+        add_action('save_post', array($this, 'save_post'));
         add_filter('woocommerce_duplicate_product_exclude_meta', array($this, 'exclude_custom_meta_from_duplication'));
 
 
@@ -42,6 +41,11 @@ class CustomMetaData extends Base
         $meta_to_exclude[] = '_discount_percentage';
 
         return $meta_to_exclude;
+    }
+
+    public function save_post($post_id)
+    {
+        self::calculate_and_save_discounts($post_id);
     }
 
     /**
@@ -112,17 +116,6 @@ class CustomMetaData extends Base
 
             update_post_meta($post_id, '_discount_amount', $max_discount_amount);
             update_post_meta($post_id, '_discount_percentage', $max_discount_percentage);
-        }
-    }
-
-    public function my_product_price_update_hook($meta_id, $post_id, $meta_key, $meta_value)
-    {
-        if (get_post_type($post_id) !== 'product') {
-            return;
-        }
-
-        if ($meta_key === '_regular_price' || $meta_key === "_sale_price") {
-            self::calculate_and_save_discounts($post_id);
         }
     }
 
