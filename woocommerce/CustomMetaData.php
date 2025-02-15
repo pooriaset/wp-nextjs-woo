@@ -29,7 +29,7 @@ class CustomMetaData extends Base
         add_action('woocommerce_product_set_stock_status', array($this, 'save_post'));
         add_action('woocommerce_variation_set_stock_status', array($this, 'save_post'));
         add_action('woocommerce_save_product_variation', array($this, 'save_post'));
-        add_action('woocommerce_after_product_object_save', array($this, 'woocommerce_after_product_object_save'), 10, 1);
+        add_action('woocommerce_after_product_object_save', array($this, 'woocommerce_after_product_object_save'), 10, 2);
 
 
         // Graphql
