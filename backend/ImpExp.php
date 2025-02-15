@@ -64,20 +64,14 @@ class ImpExp extends Base
 			return;
 		}
 
-		$args = array(
-			'post_type' => 'product',
-			'posts_per_page' => -1
-		);
+		// $args = array(
+		// 	'post_type' => 'product',
+		// 	'posts_per_page' => -1
+		// );
 
-		$products = new WP_Query($args);
+		// $products = new WP_Query($args);
 
-		if ($products->have_posts()) {
-			while ($products->have_posts()) {
-				$product_id = get_the_ID();
-				CustomMetaData::calculate_and_save_discounts($product_id);
-			}
-			wp_reset_postdata();
-		}
+		CustomMetaData::calculate_and_save_discounts(292);
 
 		exit; // phpcs:ignore
 	}
