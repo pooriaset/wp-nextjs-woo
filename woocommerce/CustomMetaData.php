@@ -26,11 +26,6 @@ class CustomMetaData extends Base
     {
         parent::initialize();
         add_action('save_post', array($this, 'save_post'));
-
-        // add_action('woocommerce_product_duplicate', array($this, 'clear_discount_meta_on_duplicate'), 10, 2);
-
-
-
         add_filter('woocommerce_duplicate_product_exclude_meta', array($this, 'exclude_custom_meta_from_duplication'));
 
         // Graphql
@@ -45,18 +40,6 @@ class CustomMetaData extends Base
         $meta_to_exclude[] = '_discount_percentage';
 
         return $meta_to_exclude;
-    }
-
-    public function clear_discount_meta_on_duplicate($duplicate_product, $original_product)
-    {
-        delete_post_meta($duplicate_product->get_id(), '_discount_amount');
-        delete_post_meta($duplicate_product->get_id(), '_discount_percentage');
-
-        $variations = $duplicate_product->get_children();
-        foreach ($variations as $variation_id) {
-            delete_post_meta($variation_id, '_discount_amount');
-            delete_post_meta($variation_id, '_discount_percentage');
-        }
     }
 
     /**
