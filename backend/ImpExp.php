@@ -70,19 +70,7 @@ class ImpExp extends Base
 		$query = new WP_Query(array(
 			'posts_per_page' => -1,
 			"post_status" => "any",
-			'post_type' => 'product',
-			'meta_query' => array(
-				'relation' => 'OR',
-				array(
-					'key' => '_discount_percentage',
-					'compare' => 'NOT EXISTS',
-				),
-				array(
-					'key' => '_discount_percentage',
-					'value' => '0',
-					'compare' => '=',
-				),
-			),
+			'post_type' => 'product'
 		));
 
 		$products = $query->posts;
