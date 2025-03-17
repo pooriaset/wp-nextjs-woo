@@ -30,17 +30,17 @@ class Cron extends Base
 		/*
 		 * Load CronPlus
 		 */
-		$args = array(
-			'recurrence'       => 'hourly',
-			'schedule'         => 'schedule',
-			'name'             => 'hourly_cron',
-			'cb'               => array($this, 'hourly_cron'),
-			'plugin_root_file' => 'WpNextJsWoo.php',
-		);
+		// $args = array(
+		// 	'recurrence'       => 'hourly',
+		// 	'schedule'         => 'schedule',
+		// 	'name'             => 'hourly_cron',
+		// 	'cb'               => array($this, 'hourly_cron'),
+		// 	'plugin_root_file' => 'WpNextJsWoo.php',
+		// );
 
-		$cronplus = new \CronPlus($args);
+		// $cronplus = new \CronPlus($args);
 		// Schedule the event
-		$cronplus->schedule_event();
+		// $cronplus->schedule_event();
 		// Remove the event by the schedule
 		// $cronplus->clear_schedule_by_hook();
 		// Jump the scheduled event
